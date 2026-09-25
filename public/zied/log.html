@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Dossier médical</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#2B7A78;     /* teal */
+      --secondary:#DEF2F1;   /* pale mint */
+      --accent:#3AAFA9;      /* aqua */
+      --text:#17252A;        /* dark gray-blue */
+      --white:#ffffff;
+      --muted:#f6f8f9;
+      --shadow: 0 8px 24px rgba(23,37,42,0.12);
+      --radius: 16px;
+      --container: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text); background:var(--white);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+      font-size: clamp(15px, 1.05vw, 16px);
+    }
+    h1,h2,h3,h4{font-family:Montserrat, Inter, sans-serif}
+
+    .container{max-width:var(--container); margin:0 auto; padding:0 20px}
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:40;
+      background:var(--white);
+      border-bottom:1px solid rgba(27,67,50,0.08);
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.6rem;
+      font-weight:700; letter-spacing:.2px; color:var(--primary);
+      text-decoration:none; font-size:1.15rem;
+    }
+    .brand .mark{
+      width:36px; height:36px; border-radius:12px; background:var(--secondary);
+      display:grid; place-items:center; color:var(--primary); font-weight:800;
+      border:2px solid var(--accent);
+    }
+
+    /* Nav */
+    .nav-desktop ul{
+      list-style:none; padding:0; margin:0; display:flex; gap:16px;
+    }
+    .nav-desktop a{
+      text-decoration:none; color:var(--text); font-weight:500;
+      padding:8px 10px; border-radius:10px;
+    }
+    .nav-desktop a:hover, .nav-desktop a:focus-visible{
+      background:var(--secondary); outline:none;
+    }
+    .nav-desktop a[aria-current="page"]{
+      background:var(--secondary);
+      color:var(--primary);
+      font-weight:600;
+    }
+    .hamburger{
+      display:none; border:2px solid var(--primary); background:transparent;
+      color:var(--primary); border-radius:12px; padding:8px 10px; cursor:pointer;
+    }
+    .nav-mobile{
+      display:none; background:var(--white); border-bottom:1px solid rgba(27,67,50,.08);
+    }
+    .nav-mobile a{display:block; padding:12px 20px; color:var(--text); text-decoration:none}
+    .nav-mobile a:hover{background:var(--secondary)}
+    .nav-mobile a[aria-current="page"]{
+      background:var(--secondary);
+      color:var(--primary);
+      font-weight:600;
+    }
+
+    .header-actions{display:flex; gap:10px}
+    .btn{
+      --bg: var(--primary); --fg: var(--white);
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:600; border:none; cursor:pointer;
+      padding:10px 14px; border-radius:12px; background:var(--bg); color:var(--fg);
+      transition:transform .08s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 2px 10px rgba(43,122,120,.15);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn-outline{
+      --bg: transparent; --fg: var(--primary);
+      border:2px solid var(--primary); box-shadow:none;
+    }
+    .btn-accent{ --bg: var(--accent); }
+
+    .input, select{
+      width:100%; padding:10px 12px; border-radius:12px;
+      border:1.5px solid rgba(23,37,42,.18); background:#fff; font:inherit;
+    }
+    .input:focus, select:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:transparent }
+
+    /* Footer */
+    .site-footer{
+      margin-top:40px; background:linear-gradient(180deg, #f9fdfd, var(--secondary));
+      border-top:1px solid rgba(27,67,50,0.12);
+      padding:26px 0;
+    }
+    .footgrid{
+      display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap:16px;
+    }
+    .site-footer a{color:var(--primary); text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+
+    /* Modal (auth) */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(23,37,42,.42);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:90;
+    }
+    .modal-backdrop[aria-hidden="false"]{ display:flex; }
+    .modal{
+      width:min(560px, 100%); background:var(--white); border-radius:16px;
+      box-shadow: 0 16px 50px rgba(23,37,42,.25);
+      border:1px solid rgba(27,67,50,0.12);
+    }
+    .modal header{
+      padding:14px 16px; display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(27,67,50,0.08); background:var(--secondary);
+      border-top-left-radius:16px; border-top-right-radius:16px;
+    }
+    .modal header h3{margin:0; color:var(--primary)}
+    .modal .close{
+      border:none; background:transparent; font-size:20px; cursor:pointer; color:var(--primary);
+      line-height:1; padding:8px; border-radius:10px;
+    }
+    .modal .close:focus-visible{ outline:2px solid var(--accent); }
+    .modal .body{ padding:16px; }
+    .tabs{ display:flex; gap:6px; padding:0 16px 8px; border-bottom:1px solid rgba(27,67,50,0.08); }
+    .tab{
+      background:transparent; border:none; font-weight:700; color:var(--text);
+      padding:10px 12px; border-radius:10px; cursor:pointer;
+    }
+    .tab[aria-selected="true"]{ background:var(--secondary); color:var(--primary) }
+    .form-grid{ display:grid; gap:12px; padding:14px 16px 4px; }
+    .error{ color:#FF6B6B; font-weight:600; display:none; }
+    .actions{ display:flex; justify-content:space-between; gap:10px; padding:10px 16px 16px; }
+    .link{ color:var(--primary); text-decoration:none; font-weight:600 }
+    .link:hover{ text-decoration:underline }
+
+    /* Responsive header/footer */
+    @media (max-width: 1024px){
+      .nav-desktop{ display:none }
+      .hamburger{ display:inline-flex; align-items:center; gap:.5rem }
+    }
+    @media (max-width: 600px){
+      .footgrid{ grid-template-columns:1fr; }
+      .header-actions .btn{ padding:9px 12px }
+    }
+
+    :focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
+
+    /* ============================ */
+    /*      PAGE: DOSSIER MED       */
+    /* ============================ */
+
+    .records-shell{
+      background:
+        radial-gradient(1200px 800px at 20% -10%, rgba(58,175,169,.12), transparent 60%),
+        var(--muted);
+      padding:32px 0 40px;
+      border-bottom:1px solid rgba(27,67,50,0.08);
+    }
+
+    .records-wrap{
+      max-width:960px; margin:0 auto; padding:0 20px;
+    }
+
+    .records-card{
+      background:var(--white); border-radius:28px;
+      border:1px solid rgba(23,37,42,.12);
+      box-shadow:var(--shadow);
+      padding:clamp(18px,3vw,28px);
+    }
+
+    .records-header{
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:16px; margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .records-title{
+      margin:0;
+      font-size:clamp(24px, 2.5vw, 30px);
+      letter-spacing:.18px;
+      color:var(--primary);
+    }
+
+    .records-meta{
+      font-size:.85rem;
+      color:#5a757a;
+      text-align:right;
+    }
+    .records-meta strong{color:var(--primary);}
+
+    .pill-state{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:4px 10px; border-radius:999px;
+      background:var(--secondary);
+      color:var(--primary);
+      font-size:.8rem;
+      font-weight:600;
+    }
+    .pill-state-dot{
+      width:8px; height:8px; border-radius:50%; background:var(--primary);
+    }
+
+    /* Timeline */
+    .timeline{
+      position:relative;
+      padding-left:92px;
+      display:flex; flex-direction:column; gap:14px;
+      margin-bottom:18px;
+      margin-top:4px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute; left:54px; top:4px; bottom:4px;
+      width:6px; background:#e0f0ee; border-radius:999px;
+    }
+
+    .titem{
+      display:grid;
+      grid-template-columns: 72px minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items:center;
+      gap:10px;
+      position:relative;
+    }
+
+    .ticon{
+      justify-self: center;
+      width:44px; height:44px; border-radius:14px;
+      background:#f5fbfb; border:1px solid rgba(23,37,42,.12);
+      box-shadow: 0 2px 6px rgba(0,0,0,.03);
+      display:grid; place-items:center;
+      color:var(--primary);
+      font-size:.75rem;
+      font-weight:700;
+    }
+    .ticon::before{
+      content:"";
+      width:24px; height:16px; border:2px solid rgba(23,37,42,.4); border-radius:4px;
+      box-shadow: 0 -6px 0 -4px rgba(23,37,42,.4);
+    }
+
+    .tcard{
+      background:#fff; border:1px solid rgba(23,37,42,.08); border-radius:18px;
+      padding:10px 14px; box-shadow: 0 4px 12px rgba(0,0,0,.03);
+    }
+    .tcard .name{
+      font-weight:800; margin-bottom:2px;
+    }
+    .tcard .sub{
+      color:#5d737a;
+      font-size:.85rem;
+    }
+    .t-tags{
+      display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;
+    }
+    .t-tag{
+      padding:2px 8px; border-radius:999px; font-size:.75rem;
+      background:#edf7f6; color:#24575c;
+      border:1px solid rgba(23,37,42,.08);
+    }
+
+    .tmeta{
+      font-size:.8rem;
+      color:#5d737a;
+      text-align:right;
+    }
+    .tmeta strong{color:var(--primary);}
+
+    /* Sections */
+    .sections{
+      padding-left:92px;
+      display:flex; flex-direction:column; gap:10px;
+      margin-top:10px;
+    }
+
+    .row{
+      display:grid; grid-template-columns: 44px minmax(0, 1fr) auto;
+      align-items:center;
+      gap:12px; padding:10px 0; border-radius:14px;
+    }
+    .row.active{
+      background:#f3fbfa; border:1px solid rgba(23,37,42,.12);
+      padding:12px 12px;
+    }
+
+    .sicon{
+      width:36px; height:36px; border-radius:10px; background:#f5fbfb;
+      border:1px solid rgba(23,37,42,.12); position:relative; justify-self:center;
+    }
+    .sicon.pill::before{
+      content:""; position:absolute; inset:0; margin:auto; width:18px; height:8px;
+      border:2px solid rgba(23,37,42,.5); border-radius:6px/6px;
+    }
+    .sicon.note::before{
+      content:""; position:absolute; left:8px; right:8px; top:10px; height:14px;
+      border:2px solid rgba(23,37,42,.5); border-radius:3px;
+    }
+    .sicon.doc::before{
+      content:""; position:absolute; left:8px; right:8px; top:8px; height:16px;
+      border:2px solid rgba(23,37,42,.5); border-radius:3px;
+    }
+    .sicon.mrec::before{
+      content:""; position:absolute; left:9px; top:9px; width:18px; height:20px;
+      border:2px solid rgba(23,37,42,.5); border-radius:3px;
+      clip-path: polygon(0 0, 70% 0, 100% 28%, 100% 100%, 0 100%);
+    }
+
+    .label-block{
+      display:flex; flex-direction:column;
+    }
+    .label{
+      font-weight:800; color:var(--text);
+    }
+    .label-sub{
+      font-size:.8rem; color:#5f757a; margin-top:2px;
+    }
+
+    .badge-count{
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:.75rem;
+      background:#edf7f6;
+      color:#24575c;
+      border:1px solid rgba(23,37,42,.12);
+      font-weight:600;
+    }
+
+    /* CTA */
+    .cta{
+      padding-left:92px;
+      margin-top:20px; display:flex; justify-content:flex-start; gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn-main{
+      border:1px solid var(--primary); color:#fff;
+      background: linear-gradient(#2B7A78,#22615f);
+      padding:12px 22px; border-radius:22px; font-weight:800; cursor:pointer;
+      min-width:220px; text-align:center; box-shadow:0 6px 16px rgba(23,37,42,.12);
+    }
+    .btn-ghost{
+      border-radius:20px; padding:11px 18px; font-weight:700; cursor:pointer;
+      border:1px solid rgba(23,37,42,.14); background:#f4fbfa; color:#24575c;
+    }
+
+    .hint{
+      margin-top:12px;
+      padding-left:92px;
+      font-size:.82rem;
+      color:#5f757a;
+    }
+
+    /* Responsive */
+    @media (max-width:720px){
+      .timeline, .sections, .cta, .hint{ padding-left:78px; }
+      .timeline::before{ left:46px; }
+      .titem{ grid-template-columns: 64px minmax(0, 1.4fr); grid-auto-rows:auto; }
+      .tmeta{ grid-column: 2 / -1; text-align:left; margin-top:4px; }
+      .row{ grid-template-columns: 40px minmax(0, 1fr); }
+      .row .badge-count{ margin-top:8px; grid-column:2 / -1; justify-self:flex-start; }
+      .records-header{ flex-direction:column; align-items:flex-start; }
+      .records-meta{text-align:left;}
+    }
+
+    .note{
+      margin-top:10px; text-align:center; color:#5f757a; font-size:13px;
+    }
+    .note strong{color:var(--primary);}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="../homepage/home.html" class="brand">
+        <span class="mark">EM</span> EspritMed
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+         <ul>
+         <li><a href="index.html">Accueil</a></li>
+          <li><a href="find.html" aria-current="page">Médecins</a></li>
+          <li><a href="book.html">Rendez-vous</a></li>
+          <li><a href="live.html">File d’attente</a></li>
+          <li><a href="emg.html">Urgences</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" aria-expanded="false" aria-controls="nav-mobile">
+        ☰ Menu
+      </button>
+
+      <div class="header-actions">
+        <button class="btn btn-outline" data-open-modal="auth">Se connecter</button>
+        <button class="btn btn-accent" data-open-modal="auth" data-pref="signup">S’inscrire</button>
+      </div>
+    </div>
+
+    <div id="nav-mobile" class="nav-mobile" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="find.html">Accueil</a>
+        <a href="find.html">Médecins</a>
+        <a href="book.html">Rendez-vous</a>
+        <a href="live.html">File d’attente</a>
+        <a href="log.html" aria-current="page">Dossier médical</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section class="records-shell">
+      <div class="records-wrap">
+        <article class="records-card" aria-label="Dossier médical étudiant (prototype)">
+          <header class="records-header">
+            <div>
+              <h1 class="records-title">Dossier médical</h1>
+              <p style="margin:.2rem 0 0; font-size:.9rem; color:#5f757a;">
+                Résumé des consultations effectuées au centre de santé universitaire.
+              </p>
+            </div>
+
+            <div class="records-meta">
+              <div><strong>Étudiant :</strong> Zied A.</div>
+              <div><strong>Numéro dossier :</strong> EM-2024-0193</div>
+              <div style="margin-top:4px;">
+                <span class="pill-state">
+                  <span class="pill-state-dot"></span>
+                  Dernière mise à jour : 22/03/2024
+                </span>
+              </div>
+            </div>
+          </header>
+
+          <!-- Timeline -->
+          <section class="timeline" aria-label="Historique des rendez-vous">
+            <!-- Item 1 -->
+            <div class="titem">
+              <div class="ticon" aria-hidden="true"></div>
+              <div class="tcard">
+                <div class="name">Dr. Alice Carter</div>
+                <div class="sub">Consultation générale — 22 mars 2024</div>
+                <div class="t-tags">
+                  <span class="t-tag">Fièvre &amp; maux de tête</span>
+                  <span class="t-tag">Campus Nord</span>
+                </div>
+              </div>
+              <div class="tmeta">
+                <div><strong>Statut :</strong> Clôturé</div>
+                <div><strong>Ordonnances :</strong> 1 document</div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="titem">
+              <div class="ticon" aria-hidden="true"></div>
+              <div class="tcard">
+                <div class="name">Dr. James Miller</div>
+                <div class="sub">Médecine du sport — 12 janvier 2024</div>
+                <div class="t-tags">
+                  <span class="t-tag">Douleurs lombaires</span>
+                  <span class="t-tag">Suivi kiné recommandé</span>
+                </div>
+              </div>
+              <div class="tmeta">
+                <div><strong>Statut :</strong> En suivi</div>
+                <div><strong>Comptes-rendus :</strong> 2 fichiers</div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="titem">
+              <div class="ticon" aria-hidden="true"></div>
+              <div class="tcard">
+                <div class="name">Dr. Sarah Wong</div>
+                <div class="sub">Consultation bien-être — 30 mai 2023</div>
+                <div class="t-tags">
+                  <span class="t-tag">Sommeil &amp; stress</span>
+                  <span class="t-tag">Conseils d’hygiène de vie</span>
+                </div>
+              </div>
+              <div class="tmeta">
+                <div><strong>Statut :</strong> Clôturé</div>
+                <div><strong>Notes :</strong> 1 synthèse</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sections -->
+          <section class="sections" aria-label="Sections du dossier">
+            <div class="row">
+              <div class="sicon pill" aria-hidden="true"></div>
+              <div class="label-block">
+                <div class="label">Ordonnances</div>
+                <div class="label-sub">Traitements prescrits et posologie.</div>
+              </div>
+              <span class="badge-count">3 fichiers</span>
+            </div>
+
+            <div class="row">
+              <div class="sicon note" aria-hidden="true"></div>
+              <div class="label-block">
+                <div class="label">Notes des médecins</div>
+                <div class="label-sub">Observations cliniques et recommandations.</div>
+              </div>
+              <span class="badge-count">5 entrées</span>
+            </div>
+
+            <div class="row">
+              <div class="sicon doc" aria-hidden="true"></div>
+              <div class="label-block">
+                <div class="label">Documents</div>
+                <div class="label-sub">Résultats de laboratoire, imagerie, certificats.</div>
+              </div>
+              <span class="badge-count">4 documents</span>
+            </div>
+
+            <div class="row active">
+              <div class="sicon mrec" aria-hidden="true"></div>
+              <div class="label-block">
+                <div class="label">Résumé médical</div>
+                <div class="label-sub">Synthèse compacte de votre état de santé actuel.</div>
+              </div>
+              <span class="badge-count">Vue active</span>
+            </div>
+          </section>
+
+          <!-- Actions -->
+          <div class="cta">
+            <button class="btn-main" type="button">Télécharger le dossier en PDF</button>
+            <button class="btn-ghost" type="button">Partager avec un médecin externe</button>
+          </div>
+
+          <p class="hint">
+            Pour des raisons de sécurité, certains éléments sensibles (tests psychologiques, données de tiers, etc.)
+            peuvent ne pas apparaître dans le PDF partagé automatiquement.
+          </p>
+        </article>
+
+        <p class="note">
+          Prototype — interface statique pour maquette EspritMed.<br>
+          <strong>Aucune donnée réelle n’est stockée ou transmise.</strong>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footgrid">
+      <div>
+        <strong style="color:var(--primary)">EspritMed</strong>
+        <p style="margin:.4rem 0 0">Service de santé universitaire — Tunis</p>
+        <p style="margin:.2rem 0 0; opacity:.9">© <span id="year"></span> Tous droits réservés.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Liens</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="#">Charte de confidentialité</a></li>
+          <li><a href="#">Conditions d’utilisation</a></li>
+          <li><a href="#">Accessibilité</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Contact</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="mailto:sante@univ.tn">sante@univ.tn</a></li>
+          <li><a href="tel:+21600000000">+216 00 000 000</a></li>
+          <li>Av. de l’Université, Tunis</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-backdrop" id="auth-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-desc">
+      <header>
+        <h3 id="auth-title">Bienvenue</h3>
+        <button class="close" type="button" aria-label="Fermer" data-close-modal>×</button>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" id="tab-login" aria-controls="panel-login">Connexion</button>
+        <button class="tab" role="tab" aria-selected="false" id="tab-signup" aria-controls="panel-signup">Inscription</button>
+      </div>
+
+      <div class="body">
+        <!-- LOGIN -->
+        <section id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Email</span>
+              <input class="input" type="email" autocomplete="username" required placeholder="vous@univ.tn" id="login-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="current-password" required placeholder="••••••••" id="login-pass">
+            </label>
+            <span class="error" id="login-error">Email ou mot de passe invalide.</span>
+            <div class="actions">
+              <a class="link" href="#">Mot de passe oublié ?</a>
+              <button class="btn" type="submit">Se connecter</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SIGNUP -->
+        <section id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Nom complet</span>
+              <input class="input" type="text" autocomplete="name" required placeholder="Votre nom">
+            </label>
+            <label>
+              <span>Email universitaire</span>
+              <input class="input" type="email" autocomplete="email" required placeholder="vous@univ.tn" id="signup-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="new-password" required placeholder="Au moins 8 caractères" id="signup-pass">
+            </label>
+            <span class="error" id="signup-error">Veuillez vérifier vos informations.</span>
+            <div class="actions">
+              <label style="display:flex; align-items:center; gap:.5rem">
+                <input type="checkbox" required> J’accepte les <a class="link" href="#" style="margin-left:.3rem">conditions</a>.
+              </label>
+              <button class="btn btn-accent" type="submit">Créer le compte</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const burger = document.querySelector('.hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    burger?.addEventListener('click', ()=>{
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      navMobile.hidden = open;
+      navMobile.style.display = open ? 'none' : 'block';
+    });
+
+    // Modal
+    const backdrop = document.getElementById('auth-backdrop');
+    const openers  = document.querySelectorAll('[data-open-modal="auth"]');
+    const closer   = document.querySelectorAll('[data-close-modal]');
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup= document.getElementById('tab-signup');
+    const paneLogin= document.getElementById('panel-login');
+    const paneSignup=document.getElementById('panel-signup');
+
+    const focusablesSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    let lastFocused;
+
+    function setTabs(mode='login'){
+      const isLogin = mode === 'login';
+      tabLogin.setAttribute('aria-selected', isLogin);
+      tabSignup.setAttribute('aria-selected', !isLogin);
+      paneLogin.hidden = !isLogin;
+      paneSignup.hidden = isLogin;
+      (document.getElementById(isLogin ? 'login-email' : 'signup-email'))?.focus({preventScroll:true});
+    }
+
+    function openModal(pref){
+      lastFocused = document.activeElement;
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      setTabs(pref === 'signup' ? 'signup' : 'login');
+      const focusables = backdrop.querySelectorAll(focusablesSelector);
+      const first = focusables[0], last = focusables[focusables.length-1];
+      backdrop.addEventListener('keydown', trap);
+      function trap(e){
+        if(e.key === 'Escape'){ closeModal(); }
+        if(e.key === 'Tab'){
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      backdrop._trap = trap;
+    }
+
+    function closeModal(){
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      backdrop.removeEventListener('keydown', backdrop._trap || (()=>{}));
+      lastFocused && lastFocused.focus({preventScroll:true});
+    }
+
+    openers.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const pref = btn.dataset.pref;
+        openModal(pref);
+      });
+    });
+    closer.forEach(btn=> btn.addEventListener('click', closeModal));
+    backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+
+    // Tabs
+    tabLogin.addEventListener('click', ()=> setTabs('login'));
+    tabSignup.addEventListener('click', ()=> setTabs('signup'));
+
+    // Dummy validation demo
+    document.querySelector('#panel-login form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('login-email').value && document.getElementById('login-pass').value;
+      document.getElementById('login-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Connecté ✨ (démo)'); }
+    });
+    document.querySelector('#panel-signup form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('signup-email').value && document.getElementById('signup-pass').value;
+      document.getElementById('signup-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Compte créé 🎉 (démo)'); }
+    });
+
+    // Reduce motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.btn').forEach(b=> b.style.transition='none');
+    }
+  </script>
+
+<script>
+  // Minimal navigation helpers for this static prototype
+  window.EMNav = {
+    go: function (url) { window.location.href = url; },
+    back: function (fallback) {
+      if (window.history.length > 1) window.history.back();
+      else window.location.href = fallback || "find.html";
+    }
+  };
+</script>
+
+</body>
+</html>

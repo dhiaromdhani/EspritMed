@@ -1,0 +1,27 @@
+/* FAQ accordion */
+.faq-item {
+    transition: all 0.3s ease-in-out;
+}
+
+.faq-header {
+    min-height: 80px;
+}
+
+.faq-icon {
+    font-weight: 300;
+    transition: transform 0.3s;
+}
+
+/* CONTACT CARDS CLICKABLE */
+.contact-item {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+}
+
+/* rendre les cartes positionnables */
+.bg-secondary-light,
+.bg-primary-teal {
+    position: relative;
+    cursor: pointer;
+}

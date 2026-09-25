@@ -1,0 +1,315 @@
+:root {
+    --primary-color: #4a9d9d;
+    --secondary-color: #f7f7f7;
+    --text-color: #333;
+    --light-text-color: #666;
+    --white: #fff;
+    --dark-gray: #555;
+    --border-color: #e0e0e0;
+}
+
+/* ================= GLOBAL ================= */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+/* ================= HEADER ================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero-banner {
+    position: relative;
+    height: 200px;
+    /* REMPLACER PAR VOTRE IMAGE (utiliser une image de 1920x200px par exemple) */
+    background: url('placeholder-banner.jpg') center center/cover;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--primary-color);
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--light-text-color);
+    text-transform: uppercase;
+}
+
+.btn {
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+
+
+.btn-connecter:hover {
+    background-color: #e6f5f5;
+}
+
+
+
+
+.btn-creer:hover {
+    background-color: #4a9d9d;
+}
+
+
+.nav-menu a:hover,
+.nav-menu .active-link {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* ================= TEAM ================= */
+.team-section {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+}
+
+/* Photo */
+.team-section .member-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.team-section .member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Carte */
+.team-section .member-card {
+    background: #e6f7f7;
+    border-radius: 26px;
+    padding: 45px 24px 26px;
+    width: 320px;
+    margin-top: -40px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.team-section .member-role {
+    text-transform: uppercase;
+    color: #7b8a8a;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+
+.team-section .member-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+/* ================= SOCIAL ICONS ================= */
+.team-section .social-icons {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.team-section .social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25em;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-connecter {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-creer {
+    background-color: #3AAFA9;
+    color: var(--white);
+    border: 1px solid var(--primary-color);
+}
+
+.hero-banner .banner-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+
+.hero-banner {
+    position: relative;
+    height: 200px;
+    background: url('img/a-propos-de-nous.png') center center/cover no-repeat;
+    background-color: #ccc; /* couleur de secours */
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 60px;
+    padding-bottom: 30px;
+}
+
+.social-link.linkedin {background-color: #0077B5; color: #ffffff; }
+.social-link.facebook {background-color: #1877F2; color: #ffffff; }
+.social-link.instagram {background-color: #E1306C; color: #ffffff; }
+
+.social-link:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* ================= BUTTON ================= */
+.profile-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background: #2B7A78;
+    color:#000000;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.team-section .profile-btn:hover {
+    background: #1f5f5c;
+    transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .team-section .member-card {
+        width: 100%;
+    }
+
+    .banner-content {
+    position: relative;
+    z-index: 1;
+}
+
+
+.banner-title {
+    color: var(--white);
+    font-size: 2.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-title,
+.contact-subtitle {
+    color: #2B7A78 !important;
+}
+
+.contact-icon {
+    color: #2B7A78 !important;
+}
+
+/* Titres des cartes Contact */
+.contact-card-title {
+    color: #2B7A78 !important;
+}
+
+/* Texte des cartes Contact */
+.contact-card-text {
+    color: #2B7A78 !important;
+}
+
+/* Footer */
+footer {
+    background-color: #E6F7F7 !important;
+    border-top: 1px solid #B2DFDF !important;
+}
+
+.footer-title {
+    color: #2B7A78 !important;
+}
+
+.footer-text {
+    color: #2B7A78 !important;
+}
+
+.footer-link {
+    color: #2B7A78 !important;
+    cursor: pointer;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+
+}

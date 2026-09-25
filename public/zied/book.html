@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Rendez-vous</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind output (and legacy.css imported via src/input.css) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="../homepage/home.html" class="brand">
+        <span class="mark">EM</span> EspritMed
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="find.html">Accueil</a></li>
+          <li><a href="find.html">Médecins</a></li>
+          <li><a href="book.html" aria-current="page">Rendez-vous</a></li>
+          <li><a href="live.html">File d’attente</a></li>
+          <li><a href="emg.html">Urgences</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" aria-expanded="false" aria-controls="nav-mobile">
+        ☰ Menu
+      </button>
+
+      <div class="header-actions">
+        <button class="btn btn-outline" data-open-modal="auth">Se connecter</button>
+        <button class="btn btn-accent" data-open-modal="auth" data-pref="signup">S’inscrire</button>
+      </div>
+    </div>
+
+    <div id="nav-mobile" class="nav-mobile" hidden>
+    <ul>
+         <li><a href="index.html">Accueil</a></li>
+          <li><a href="find.html" aria-current="page">Médecins</a></li>
+          <li><a href="book.html">Rendez-vous</a></li>
+          <li><a href="live.html">File d’attente</a></li>
+          <li><a href="emg.html">Urgences</a></li>
+        </ul>
+    </div>
+  </header>
+
+  <!-- Rendez-vous main content -->
+  <main>
+    <section class="page-shell">
+      <div class="container">
+        <header class="page-header">
+          <div>
+            <h1 class="page-title">Prendre un rendez-vous</h1>
+            <p class="page-subtitle">
+              Choisissez un médecin, un créneau, précisez la raison de votre visite, puis validez.
+            </p>
+          </div>
+          <div class="status-badge" aria-label="Disponibilité des médecins">
+            <div class="status-dot" aria-hidden="true"></div>
+            <div>
+              <div style="font-weight:700; line-height:1;">Médecins disponibles</div>
+              <div class="status-text-weak">Temps d’attente moyen : ~12&nbsp;min</div>
+            </div>
+          </div>
+        </header>
+
+        <section class="board" aria-label="Formulaire de réservation de rendez-vous">
+          <h2 class="board-title">Réservation de consultation</h2>
+          <p class="board-helper">
+            Prototype statique — l’exemple ci-dessous illustre le flux de prise de rendez-vous et le QR code de check-in.
+          </p>
+
+          <div class="appointment-grid">
+            <!-- Left: booking form -->
+            <article class="card" aria-label="Formulaire de rendez-vous">
+              <div class="field">
+                <span class="field-label">Choisir un médecin</span>
+
+                <div class="fake-select" aria-label="Sélection du médecin (exemple statique)">
+                  <div class="fake-select-main">
+                    <!-- Doctor photo (same as profile) -->
+       <div class="doctor-avatar" aria-label="Portrait du médecin">
+  <img src="assets/doctor.png" alt="Portrait du médecin">
+</div>
+
+
+                    <div>
+                      <div class="fake-select-name">Dr&nbsp;Zied Johnson</div>
+                      <div class="fake-select-meta">Médecine interne • Service EspritMed</div>
+                    </div>
+                  </div>
+                  <span class="caret" aria-hidden="true"></span>
+                </div>
+              </div>
+
+              <div class="field">
+                <span class="field-label">Date & heure</span>
+                <div class="row-2">
+                  <label>
+                    <span class="field-label" style="font-weight:600; font-size:.85rem;">Date</span>
+                    <input class="input" type="date" aria-label="Choisir une date">
+                  </label>
+
+                  <div>
+                    <span class="field-label" style="font-weight:600; font-size:.85rem;">Heure & attente estimée</span>
+                    <div class="row-2">
+                      <div class="time-block">
+                        <span class="clock" aria-hidden="true"></span>
+                        <span>10:00</span>
+                      </div>
+
+                      <div class="pill-info">
+                        <span class="time-icon" aria-hidden="true"></span>
+                        <div><strong>Attente estimée :</strong> 12&nbsp;min</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <span class="field-label">Raison de la visite</span>
+                <textarea class="textarea" placeholder="Ex. : douleur au ventre depuis 2 jours, fatigue, etc." aria-label="Raison de la visite"></textarea>
+              </div>
+
+              <button class="btn btn-accent btn-full" type="button">
+                Confirmer le rendez-vous
+              </button>
+            </article>
+
+            <!-- Right: QR + summary -->
+            <aside class="card" aria-label="Récapitulatif et QR code (exemple)">
+              <div class="qr-wrap">
+                <!-- Real QR image -->
+                <div class="qr-box" aria-label="QR code de check-in">
+  <img
+    src="assets/qr.png"
+    alt="QR code du rendez-vous"
+    class="qr-img"
+  />
+</div>
+
+                <div class="qr-note">Présentez ce code à l’accueil pour confirmer votre arrivée.</div>
+
+                <div class="summary" aria-label="Résumé du rendez-vous (exemple)">
+                  <div class="summary-item">
+                    <div class="summary-icon cal" aria-hidden="true"></div>
+                    <div>
+                      <strong>Dr&nbsp;Zied Johnson</strong><br>
+                      Médecine interne — Service de santé universitaire
+                    </div>
+                  </div>
+
+                  <div class="summary-item">
+                    <div class="summary-icon time" aria-hidden="true"></div>
+                    <div>15&nbsp;avril&nbsp;2024 à 10:00 • Attente estimée ~12&nbsp;min</div>
+                  </div>
+
+                  <div class="summary-item">
+                    <div class="summary-icon loc" aria-hidden="true"></div>
+                    <div>Centre de santé universitaire — Bloc A, 1er étage</div>
+                  </div>
+                </div>
+
+                <div class="summary-ctas">
+                  <button class="btn-ghost" type="button" onclick="alert('Prototype : reprogrammation')">Reprogrammer</button>
+                  <button class="btn-ghost" type="button" onclick="alert('Prototype : annulation')">Annuler</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <p class="proto-note">
+            Prototype — contenu statique pour illustrer le parcours de prise de rendez-vous, l’attente estimée et le QR de check-in.
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footgrid">
+      <div>
+        <strong style="color:var(--primary)">EspritMed</strong>
+        <p style="margin:.4rem 0 0">Service de santé universitaire — Tunis</p>
+        <p style="margin:.2rem 0 0; opacity:.9">© <span id="year"></span> Tous droits réservés.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Liens</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="#">Charte de confidentialité</a></li>
+          <li><a href="#">Conditions d’utilisation</a></li>
+          <li><a href="#">Accessibilité</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Contact</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="mailto:sante@univ.tn">sante@univ.tn</a></li>
+          <li><a href="tel:+21600000000">+216 00 000 000</a></li>
+          <li>Av. de l’Université, Tunis</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-backdrop" id="auth-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-desc">
+      <header>
+        <h3 id="auth-title">Bienvenue</h3>
+        <button class="close" type="button" aria-label="Fermer" data-close-modal>×</button>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" id="tab-login" aria-controls="panel-login">Connexion</button>
+        <button class="tab" role="tab" aria-selected="false" id="tab-signup" aria-controls="panel-signup">Inscription</button>
+      </div>
+
+      <div class="body">
+        <!-- LOGIN -->
+        <section id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Email</span>
+              <input class="input" type="email" autocomplete="username" required placeholder="vous@univ.tn" id="login-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="current-password" required placeholder="••••••••" id="login-pass">
+            </label>
+            <span class="error" id="login-error">Email ou mot de passe invalide.</span>
+            <div class="actions">
+              <a class="link" href="#">Mot de passe oublié ?</a>
+              <button class="btn" type="submit">Se connecter</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SIGNUP -->
+        <section id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Nom complet</span>
+              <input class="input" type="text" autocomplete="name" required placeholder="Votre nom">
+            </label>
+            <label>
+              <span>Email universitaire</span>
+              <input class="input" type="email" autocomplete="email" required placeholder="vous@univ.tn" id="signup-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="new-password" required placeholder="Au moins 8 caractères" id="signup-pass">
+            </label>
+            <span class="error" id="signup-error">Veuillez vérifier vos informations.</span>
+            <div class="actions">
+              <label style="display:flex; align-items:center; gap:.5rem">
+                <input type="checkbox" required> J’accepte les <a class="link" href="#" style="margin-left:.3rem">conditions</a>.
+              </label>
+              <button class="btn btn-accent" type="submit">Créer le compte</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const burger = document.querySelector('.hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    burger?.addEventListener('click', ()=>{
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      navMobile.hidden = open;
+      navMobile.style.display = open ? 'none' : 'block';
+    });
+
+    // Modal
+    const backdrop = document.getElementById('auth-backdrop');
+    const openers  = document.querySelectorAll('[data-open-modal="auth"]');
+    const closer   = document.querySelectorAll('[data-close-modal]');
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup= document.getElementById('tab-signup');
+    const paneLogin= document.getElementById('panel-login');
+    const paneSignup=document.getElementById('panel-signup');
+
+    const focusablesSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    let lastFocused;
+
+    function setTabs(mode='login'){
+      const isLogin = mode === 'login';
+      tabLogin.setAttribute('aria-selected', isLogin);
+      tabSignup.setAttribute('aria-selected', !isLogin);
+      paneLogin.hidden = !isLogin;
+      paneSignup.hidden = isLogin;
+      (document.getElementById(isLogin ? 'login-email' : 'signup-email'))?.focus({preventScroll:true});
+    }
+
+    function openModal(pref){
+      lastFocused = document.activeElement;
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      setTabs(pref === 'signup' ? 'signup' : 'login');
+      const focusables = backdrop.querySelectorAll(focusablesSelector);
+      const first = focusables[0], last = focusables[focusables.length-1];
+      backdrop.addEventListener('keydown', trap);
+      function trap(e){
+        if(e.key === 'Escape'){ closeModal(); }
+        if(e.key === 'Tab'){
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      backdrop._trap = trap;
+    }
+
+    function closeModal(){
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      backdrop.removeEventListener('keydown', backdrop._trap || (()=>{}));
+      lastFocused && lastFocused.focus({preventScroll:true});
+    }
+
+    openers.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const pref = btn.dataset.pref;
+        openModal(pref);
+      });
+    });
+    closer.forEach(btn=> btn.addEventListener('click', closeModal));
+    backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+
+    // Tabs click
+    tabLogin.addEventListener('click', ()=> setTabs('login'));
+    tabSignup.addEventListener('click', ()=> setTabs('signup'));
+
+    // Dummy validation demo
+    document.querySelector('#panel-login form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('login-email').value && document.getElementById('login-pass').value;
+      document.getElementById('login-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Connecté ✨ (démo)'); }
+    });
+    document.querySelector('#panel-signup form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('signup-email').value && document.getElementById('signup-pass').value;
+      document.getElementById('signup-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Compte créé 🎉 (démo)'); }
+    });
+
+    // Reduce motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.btn').forEach(b=> b.style.transition='none');
+    }
+  </script>
+
+  <script>
+    // Minimal navigation helpers for this static prototype
+    window.EMNav = {
+      go: function (url) { window.location.href = url; },
+      back: function (fallback) {
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = fallback || "find.html";
+      }
+    };
+  </script>
+</body>
+</html>

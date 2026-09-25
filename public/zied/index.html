@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Accueil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#2B7A78;     /* teal */
+      --secondary:#DEF2F1;   /* pale mint */
+      --accent:#3AAFA9;      /* aqua */
+      --text:#17252A;        /* dark gray-blue */
+      --error:#FF6B6B;
+      --white:#ffffff;
+      --muted:#f6f8f9;
+      --shadow: 0 8px 24px rgba(23,37,42,0.12);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --container: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text); background:var(--white);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+      font-size: clamp(15px, 1.05vw, 16px);
+    }
+    h1,h2,h3,h4{font-family:Montserrat, Inter, sans-serif}
+
+    .container{max-width:var(--container); margin:0 auto; padding:0 20px}
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:40;
+      background:var(--white);
+      border-bottom:1px solid rgba(27,67,50,0.08);
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.6rem;
+      font-weight:700; letter-spacing:.2px; color:var(--primary);
+      text-decoration:none; font-size:1.15rem;
+    }
+    .brand .mark{
+      width:36px; height:36px; border-radius:12px; background:var(--secondary);
+      display:grid; place-items:center; color:var(--primary); font-weight:800;
+      border:2px solid var(--accent);
+    }
+
+    /* Nav */
+    .nav-desktop ul{
+      list-style:none; padding:0; margin:0; display:flex; gap:16px;
+    }
+    .nav-desktop a{
+      text-decoration:none; color:var(--text); font-weight:500;
+      padding:8px 10px; border-radius:10px;
+    }
+    .nav-desktop a:hover, .nav-desktop a:focus-visible{
+      background:var(--secondary); outline:none;
+    }
+    .hamburger{
+      display:none; border:2px solid var(--primary); background:transparent;
+      color:var(--primary); border-radius:12px; padding:8px 10px; cursor:pointer;
+    }
+    .nav-mobile{
+      display:none; background:var(--white); border-bottom:1px solid rgba(27,67,50,.08);
+    }
+    .nav-mobile a{display:block; padding:12px 20px; color:var(--text); text-decoration:none}
+    .nav-mobile a:hover{background:var(--secondary)}
+
+    .header-actions{display:flex; gap:10px}
+    .btn{
+      --bg: var(--primary); --fg: var(--white);
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:600; border:none; cursor:pointer;
+      padding:10px 14px; border-radius:12px; background:var(--bg); color:var(--fg);
+      transition:transform .08s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 2px 10px rgba(43,122,120,.15);
+      text-decoration:none;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn-outline{
+      --bg: transparent; --fg: var(--primary);
+      border:2px solid var(--primary); box-shadow:none;
+    }
+    .btn-accent{ --bg: var(--accent); }
+
+    /* Hero */
+    .hero{
+      background:
+        radial-gradient(1200px 400px at 70% -20%, rgba(58,175,169,.08), transparent 70%),
+        linear-gradient(180deg, var(--secondary), #f9fdfd 70%);
+      padding:64px 0 40px;
+      border-bottom:1px solid rgba(27,67,50,0.08);
+    }
+    .hero .wrap{
+      display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:center;
+    }
+    .hero h1{
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      line-height:1.15; margin:0 0 10px; color:var(--primary);
+    }
+    .hero p{margin:0 0 18px; font-size:1.05rem; color:#234}
+    .hero .cta{display:flex; gap:12px; flex-wrap:wrap}
+
+    .hero-card{
+      background:var(--white); border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px; border:1px solid rgba(27,67,50,0.08);
+    }
+    .hero-card h3{margin:0 0 10px; color:var(--primary)}
+    .hero-card .row{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+    .input, select{
+      width:100%; padding:10px 12px; border-radius:12px;
+      border:1.5px solid rgba(23,37,42,.18); background:#fff; font:inherit;
+    }
+    .input:focus, select:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:transparent }
+
+    /* Kicker */
+    .kicker{
+      display:inline-block; padding:2px 8px; border-radius:999px;
+      background:var(--secondary); color:var(--primary); font-size:.78rem; font-weight:700;
+      letter-spacing:.2px;
+    }
+    .helper{ font-size:.9rem; color:#3a4f55; margin-top:6px }
+    .link{ color:var(--primary); text-decoration:none; font-weight:600 }
+    .link:hover{ text-decoration:underline }
+
+    /* ✅ Right illustration block (this is where the avatar should live) */
+    .home-illo{
+      position:relative;
+      width:100%;
+      min-height:240px;
+      border-radius:var(--radius);
+      border:1px solid rgba(27,67,50,.08);
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(800px 220px at 50% 20%, rgba(58,175,169,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* subtle horizontal divider like your screenshot */
+    .home-illo::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:62%;
+      height:1px;
+      background:rgba(39,85,90,.22);
+    }
+
+    /* ✅ Avatar fixed in the middle-right panel */
+    .doctor-avatar{
+      position:absolute;
+      top:48%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:66px;
+      height:66px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#fff;
+      border:3px solid rgba(43,122,120,.22);
+      box-shadow:0 10px 22px rgba(23,37,42,.14);
+      display:block;
+      cursor:pointer;
+      z-index:2;
+    }
+
+    .doctor-avatar .qr-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .doctor-avatar:hover{
+      transform:translate(-50%,-50%) scale(1.05);
+      border-color: rgba(58,175,169,.55);
+    }
+
+    .doctor-avatar:focus-visible{
+      outline:2px solid var(--accent);
+      outline-offset:4px;
+    }
+
+    /* Stats band */
+    .stats{
+      background:var(--white);
+      border-bottom:1px solid rgba(27,67,50,.08);
+    }
+    .stats-grid{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+      padding:18px 0;
+    }
+    .stat{
+      background:var(--secondary); border:1px solid rgba(27,67,50,.12);
+      border-radius:12px; padding:14px; text-align:center;
+    }
+    .stat .num{font-weight:800; font-size:1.2rem; color:var(--primary)}
+    .stat .lab{font-size:.9rem}
+
+    /* Features */
+    .section{padding:40px 0}
+    .cards{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+    .card{
+      background:var(--white); border-radius:var(--radius);
+      border:1px solid rgba(27,67,50,0.08); box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .card h4{margin:6px 0 8px; color:var(--primary)}
+    .card .actions{margin-top:10px}
+
+    /* Footer */
+    .site-footer{
+      margin-top:40px; background:linear-gradient(180deg, #f9fdfd, var(--secondary));
+      border-top:1px solid rgba(27,67,50,0.12);
+      padding:26px 0;
+    }
+    .footgrid{
+      display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap:16px;
+    }
+    .site-footer a{color:var(--primary); text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+
+    /* Modal (auth) */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(23,37,42,.42);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:90;
+    }
+    .modal-backdrop[aria-hidden="false"]{ display:flex; }
+    .modal{
+      width:min(560px, 100%); background:var(--white); border-radius:16px;
+      box-shadow: 0 16px 50px rgba(23,37,42,.25);
+      border:1px solid rgba(27,67,50,0.12);
+    }
+    .modal header{
+      padding:14px 16px; display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(27,67,50,0.08); background:var(--secondary);
+      border-top-left-radius:16px; border-top-right-radius:16px;
+    }
+    .modal header h3{margin:0; color:var(--primary)}
+    .modal .close{
+      border:none; background:transparent; font-size:20px; cursor:pointer; color:var(--primary);
+      line-height:1; padding:8px; border-radius:10px;
+    }
+    .modal .close:focus-visible{ outline:2px solid var(--accent); }
+    .tabs{ display:flex; gap:6px; padding:0 16px 8px; border-bottom:1px solid rgba(27,67,50,0.08); }
+    .tab{
+      background:transparent; border:none; font-weight:700; color:var(--text);
+      padding:10px 12px; border-radius:10px; cursor:pointer;
+    }
+    .tab[aria-selected="true"]{ background:var(--secondary); color:var(--primary) }
+    .form-grid{ display:grid; gap:12px; padding:14px 16px 4px; }
+    .error{ color:var(--error); font-weight:600; display:none; }
+    .actions{ display:flex; justify-content:space-between; gap:10px; padding:10px 16px 16px; }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero .wrap{ grid-template-columns:1fr; }
+      .stats-grid{ grid-template-columns:repeat(2,1fr); }
+      .cards{ grid-template-columns:1fr 1fr; }
+      .nav-desktop{ display:none }
+      .hamburger{ display:inline-flex; align-items:center; gap:.5rem }
+      .home-illo{ min-height:200px; }
+    }
+    @media (max-width: 600px){
+      .cards{ grid-template-columns:1fr; }
+      .footgrid{ grid-template-columns:1fr; }
+      .header-actions .btn{ padding:9px 12px }
+      .hero-card .row{ grid-template-columns:1fr; }
+      .stats-grid{ grid-template-columns:1fr; }
+    }
+
+    :focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
+
+
+
+
+    /* Right side hero visual */
+.hero-visual{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.6),
+    rgba(255,255,255,.9)
+  );
+
+  border-radius: 22px;
+  border: 1px solid rgba(27,67,50,.12);
+  box-shadow: 0 18px 40px rgba(23,37,42,.12);
+
+  min-height: 360px;
+  padding: 28px;
+}
+
+/* The actual hero image */
+.hero-img{
+  width: 100%;
+  max-width: 320px;      /* control size */
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 18px;
+
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.15));
+}
+
+/* Bigger on large screens */
+@media (min-width: 1200px){
+  .hero-img{
+    max-width: 380px;
+  }
+}
+
+/* Hide image on small screens (mobile) */
+@media (max-width: 900px){
+  .hero-visual{
+    display: none;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="../homepage/home.html" class="brand">
+        <span class="mark">EM</span> EspritMed
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html" aria-current="page">Accueil</a></li>
+          <li><a href="find.html">Médecins</a></li>
+          <li><a href="book.html">Rendez-vous</a></li>
+          <li><a href="live.html">File d’attente</a></li>
+          <li><a href="emg.html">Urgences</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" aria-expanded="false" aria-controls="nav-mobile">
+        ☰ Menu
+      </button>
+
+      <div class="header-actions">
+        <button class="btn btn-outline" data-open-modal="auth">Se connecter</button>
+        <button class="btn btn-accent" data-open-modal="auth" data-pref="signup">S’inscrire</button>
+      </div>
+    </div>
+
+    <div id="nav-mobile" class="nav-mobile" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="find.html">Médecins</a>
+        <a href="book.html">Rendez-vous</a>
+        <a href="live.html">File d’attente</a>
+        <a href="emg.html">Urgences</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container wrap">
+      <!-- Left -->
+      <div>
+        <h1>La santé sur le campus, simple et rapide.</h1>
+        <p>Réservez une consultation, suivez la file d’attente en direct, trouvez un spécialiste, et accédez aux urgences en un clic.</p>
+
+        <div class="cta">
+          <button class="btn" data-open-modal="auth">Se connecter</button>
+          <a class="btn btn-accent" href="#" data-open-modal="auth" data-pref="signup">Créer un compte</a>
+        </div>
+
+        <div class="hero-card" aria-describedby="hero-helper" style="margin-top:16px">
+          <span class="kicker">Démarrer</span>
+          <h3 id="hero-helper">Réservation rapide</h3>
+
+          <div class="row" style="margin:10px 0 12px">
+            <label>
+              <span style="display:block; font-weight:600">Spécialité</span>
+              <select aria-label="Choisir une spécialité">
+                <option>Médecine générale</option>
+                <option>Psychiatrie</option>
+                <option>Dermatologie</option>
+                <option>Cardiologie</option>
+              </select>
+            </label>
+
+            <label>
+              <span style="display:block; font-weight:600">Date</span>
+              <input class="input" type="date" aria-label="Choisir une date">
+            </label>
+          </div>
+
+          <button class="btn" style="width:100%">Rechercher un créneau</button>
+          <p class="helper">Vous n’avez pas de compte ?
+            <a class="link" href="#" data-open-modal="auth" data-pref="signup">Inscrivez-vous</a> en 30 secondes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div aria-hidden="true">
+       <div class="hero-visual">
+  <img
+    src="assets/doctor.png"
+    alt="Médecin du campus EspritMed"
+    class="hero-img"
+  />
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" aria-label="Statistiques EspritMed">
+    <div class="container stats-grid">
+      <div class="stat"><div class="num">24/7</div><div class="lab">Assistance</div></div>
+      <div class="stat"><div class="num">+120</div><div class="lab">Consultations / jour</div></div>
+      <div class="stat"><div class="num">15</div><div class="lab">Spécialités</div></div>
+      <div class="stat"><div class="num">3 min</div><div class="lab">Temps d’inscription</div></div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="container">
+      <div class="cards">
+        <article class="card">
+          <span class="kicker">File d’attente</span>
+          <h4>Temps d’attente en direct</h4>
+          <p>Consultez le nombre d’étudiants en file et l’estimation en minutes avant votre passage.</p>
+          <div class="actions"><button class="btn btn-outline">Voir la file</button></div>
+        </article>
+
+        <article class="card">
+          <span class="kicker">Spécialistes</span>
+          <h4>Trouvez le bon médecin</h4>
+          <p>Filtrez par spécialité, disponibilité et langue. Réservez en un clic.</p>
+          <div class="actions"><button class="btn btn-outline">Parcourir</button></div>
+        </article>
+
+        <article class="card">
+          <span class="kicker">Urgences</span>
+          <h4>Bouton SOS</h4>
+          <p>Accès rapide aux urgences du campus et numéros prioritaires.</p>
+          <div class="actions"><button class="btn btn-accent">SOS</button></div>
+        </article>
+
+        <article class="card">
+          <span class="kicker">Téléconsultation</span>
+          <h4>En ligne, en toute sécurité</h4>
+          <p>Discutez avec un médecin sans vous déplacer via un salon vidéo sécurisé.</p>
+          <div class="actions"><button class="btn">Démarrer</button></div>
+        </article>
+
+        <article class="card">
+          <span class="kicker">Vaccination</span>
+          <h4>Rappels & RDV</h4>
+          <p>Recevez des rappels et prenez rendez-vous pour vos vaccins obligatoires.</p>
+          <div class="actions"><button class="btn btn-outline">Planifier</button></div>
+        </article>
+
+        <article class="card">
+          <span class="kicker">Pharmacie</span>
+          <h4>Ordonnances & renouvellements</h4>
+          <p>Gérez vos ordonnances et trouvez la pharmacie de garde la plus proche.</p>
+          <div class="actions"><button class="btn btn-outline">Consulter</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footgrid">
+      <div>
+        <strong style="color:var(--primary)">EspritMed</strong>
+        <p style="margin:.4rem 0 0">Service de santé universitaire — Tunis</p>
+        <p style="margin:.2rem 0 0; opacity:.9">© <span id="year"></span> Tous droits réservés.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Liens</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="#">Charte de confidentialité</a></li>
+          <li><a href="#">Conditions d’utilisation</a></li>
+          <li><a href="#">Accessibilité</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Contact</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="mailto:sante@univ.tn">sante@univ.tn</a></li>
+          <li><a href="tel:+21600000000">+216 00 000 000</a></li>
+          <li>Av. de l’Université, Tunis</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-backdrop" id="auth-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-desc">
+      <header>
+        <h3 id="auth-title">Bienvenue</h3>
+        <button class="close" type="button" aria-label="Fermer" data-close-modal>×</button>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" id="tab-login" aria-controls="panel-login">Connexion</button>
+        <button class="tab" role="tab" aria-selected="false" id="tab-signup" aria-controls="panel-signup">Inscription</button>
+      </div>
+
+      <div class="body">
+        <!-- LOGIN -->
+        <section id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Email</span>
+              <input class="input" type="email" autocomplete="username" required placeholder="vous@univ.tn" id="login-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="current-password" required placeholder="••••••••" id="login-pass">
+            </label>
+            <span class="error" id="login-error">Email ou mot de passe invalide.</span>
+            <div class="actions">
+              <a class="link" href="#">Mot de passe oublié ?</a>
+              <button class="btn" type="submit">Se connecter</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SIGNUP -->
+        <section id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Nom complet</span>
+              <input class="input" type="text" autocomplete="name" required placeholder="Votre nom">
+            </label>
+            <label>
+              <span>Email universitaire</span>
+              <input class="input" type="email" autocomplete="email" required placeholder="vous@univ.tn" id="signup-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="new-password" required placeholder="Au moins 8 caractères" id="signup-pass">
+            </label>
+            <span class="error" id="signup-error">Veuillez vérifier vos informations.</span>
+            <div class="actions">
+              <label style="display:flex; align-items:center; gap:.5rem">
+                <input type="checkbox" required> J’accepte les <a class="link" href="#" style="margin-left:.3rem">conditions</a>.
+              </label>
+              <button class="btn btn-accent" type="submit">Créer le compte</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const burger = document.querySelector('.hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    burger?.addEventListener('click', ()=>{
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      navMobile.hidden = open;
+      navMobile.style.display = open ? 'none' : 'block';
+    });
+
+    // Modal
+    const backdrop = document.getElementById('auth-backdrop');
+    const openers  = document.querySelectorAll('[data-open-modal="auth"]');
+    const closer   = document.querySelectorAll('[data-close-modal]');
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup= document.getElementById('tab-signup');
+    const paneLogin= document.getElementById('panel-login');
+    const paneSignup=document.getElementById('panel-signup');
+
+    const focusablesSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    let lastFocused;
+
+    function setTabs(mode='login'){
+      const isLogin = mode === 'login';
+      tabLogin.setAttribute('aria-selected', isLogin);
+      tabSignup.setAttribute('aria-selected', !isLogin);
+      paneLogin.hidden = !isLogin;
+      paneSignup.hidden = isLogin;
+      (document.getElementById(isLogin ? 'login-email' : 'signup-email'))?.focus({preventScroll:true});
+    }
+
+    function openModal(pref){
+      lastFocused = document.activeElement;
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      setTabs(pref === 'signup' ? 'signup' : 'login');
+      const focusables = backdrop.querySelectorAll(focusablesSelector);
+      const first = focusables[0], last = focusables[focusables.length-1];
+      backdrop.addEventListener('keydown', trap);
+      function trap(e){
+        if(e.key === 'Escape'){ closeModal(); }
+        if(e.key === 'Tab'){
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      backdrop._trap = trap;
+    }
+
+    function closeModal(){
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      backdrop.removeEventListener('keydown', backdrop._trap || (()=>{}));
+      lastFocused && lastFocused.focus({preventScroll:true});
+    }
+
+    openers.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const pref = btn.dataset.pref;
+        openModal(pref);
+      });
+    });
+    closer.forEach(btn=> btn.addEventListener('click', closeModal));
+    backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+
+    tabLogin.addEventListener('click', ()=> setTabs('login'));
+    tabSignup.addEventListener('click', ()=> setTabs('signup'));
+
+    document.querySelector('#panel-login form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('login-email').value && document.getElementById('login-pass').value;
+      document.getElementById('login-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Connecté ✨ (démo)'); }
+    });
+    document.querySelector('#panel-signup form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('signup-email').value && document.getElementById('signup-pass').value;
+      document.getElementById('signup-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Compte créé 🎉 (démo)'); }
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.btn').forEach(b=> b.style.transition='none');
+    }
+  </script>
+</body>
+</html>

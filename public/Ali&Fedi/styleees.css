@@ -1,0 +1,349 @@
+:root{
+  --primary:#2B7A78;
+  --accent:#3AAFA9;
+  --bg:#EEF7F7;
+  --card:#ffffff;
+  --text:#17252A;
+  --muted:#6B7C86;
+
+  --shadow: 0 10px 24px rgba(23,37,42,.08);
+  --shadow-soft: 0 10px 22px rgba(23,37,42,.08);
+
+  --radius: 16px;
+  --container: 1080px;
+}
+
+*,
+*::before,
+*::after{ box-sizing:border-box; }
+
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background: #f3f6f7;
+}
+
+/* layout */
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* TOPBAR */
+.topbar{
+  background:#fff;
+  border-bottom:1px solid rgba(23,37,42,.08);
+}
+.topbar-inner{
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+/* Brand */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color: var(--text);
+  flex:0 0 auto;
+}
+.brand-badge{
+  width:24px; height:24px;
+  border-radius: 8px;
+  display:grid; place-items:center;
+  font-size:11px;
+  font-weight:900;
+  color:#0f3f3e;
+  background:#E6F5F4;
+  border:1px solid rgba(43,122,120,.35);
+}
+.brand-name{
+  font-weight:800;
+  font-size:13px;
+  color:#0f3f3e;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-size:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  flex:1;
+}
+.nav a{
+  text-decoration:none;
+  color:#2B3A3F;
+  padding:6px 2px;
+  border-radius: 10px;
+}
+.nav a:hover{ color: var(--primary); }
+.nav a.active{
+  color: var(--accent);
+  font-weight:800;
+}
+
+/* Actions */
+.actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex:0 0 auto;
+}
+.btn{
+  border:none;
+  cursor:pointer;
+  border-radius: 999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:800;
+  transition: transform .08s ease, box-shadow .2s ease;
+}
+.btn:active{ transform: translateY(1px); }
+
+.btn-solid{
+  background: var(--accent);
+  color:#fff;
+  box-shadow: 0 6px 16px rgba(58,175,169,.18);
+}
+.btn-mini{
+  background: transparent;
+  color: var(--primary);
+  border:1px solid rgba(43,122,120,.45);
+}
+
+/* MAIN */
+.main{
+  min-height: calc(100vh - 56px - 160px);
+  background: #f4f7f8;
+}
+
+/* HERO */
+.hero{
+  padding: 42px 0 70px;
+}
+.hero-inner{
+  text-align:center;
+  max-width: 760px;
+}
+
+.hero h1{
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: #1f6f6d;
+  letter-spacing:.2px;
+}
+.sub{
+  margin:0 auto 18px;
+  max-width: 640px;
+  font-size: 12px;
+  color: rgba(23,37,42,.65);
+}
+
+/* Search */
+.search-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+.searchbar{
+  width: min(650px, 92vw);
+  background:#fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(23,37,42,.06);
+  padding: 10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.search-icon{
+  width:34px;
+  height:34px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  color: rgba(43,122,120,.8);
+  background: #F4FBFB;
+  border:1px solid rgba(43,122,120,.12);
+}
+.search-input{
+  flex:1;
+  height: 36px;
+  border:none;
+  outline:none;
+  border-radius: 12px;
+  background: #DFF1F0;
+  padding: 0 14px;
+  font-size: 12px;
+  color: #183237;
+}
+
+/* Cards list */
+.cards{
+  width: min(520px, 92vw);
+  margin: 18px auto 0;
+  display:grid;
+  gap: 14px;
+}
+
+/* Doctor Card */
+.doc-card{
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  border:1px solid rgba(23,37,42,.06);
+  padding: 14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+}
+
+.doc-left{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius: 999px;
+  overflow:hidden;
+  border:1px solid rgba(23,37,42,.10);
+  flex:0 0 auto;
+  background:#fff;
+  display:grid;
+  place-items:center;
+}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.avatar-initials{
+  font-weight:900;
+  color:#0f3f3e;
+  background:#E6F5F4;
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+}
+
+.doc-info{ min-width: 0; text-align:left; }
+.doc-name{
+  font-weight:900;
+  font-size:12px;
+  margin-bottom:3px;
+}
+.doc-meta{
+  font-size:11px;
+  color: rgba(23,37,42,.55);
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.doc-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap: 8px;
+  flex:0 0 auto;
+}
+
+/* Status pill */
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  font-weight:900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border:1px solid rgba(23,37,42,.08);
+  background:#F6FBFB;
+  color: rgba(23,37,42,.60);
+}
+.status-pill .dot{
+  width:8px; height:8px;
+  border-radius: 50%;
+}
+.status-ok .dot{ background:#2ECC71; }
+.status-warn .dot{ background:#F39C12; }
+
+/* Reserve button (pill) */
+.pill-btn{
+  border:1px solid rgba(43,122,120,.50);
+  background:#fff;
+  color: var(--primary);
+  border-radius: 999px;
+  font-weight:900;
+  font-size: 11px;
+  padding: 7px 14px;
+  cursor:pointer;
+}
+.pill-btn:hover{
+  background:#E6F5F4;
+}
+
+/* FOOTER */
+.footer{
+  background: #d4f1f1;
+  padding: 26px 0;
+  border-top:1px solid rgba(23,37,42,.08);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  align-items:start;
+}
+
+.f-title{
+  color: var(--primary);
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 900;
+}
+.f-text{
+  margin: 6px 0;
+  color: #2a6a6a;
+  line-height: 1.6;
+  font-size: 12px;
+}
+.f-link{
+  display:block;
+  color:#2a6a6a;
+  text-decoration:none;
+  margin: 6px 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+.f-link:hover{ color:#1a5a5a; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .nav{ display:none; }
+}
+@media (max-width: 768px){
+  .footer-grid{ grid-template-columns: 1fr; gap: 18px; }
+}
+@media (max-width: 640px){
+  .doc-card{ align-items:flex-start; }
+  .doc-right{ align-items:flex-start; }
+}

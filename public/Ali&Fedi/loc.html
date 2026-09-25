@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EspritMed — Localisation</title>
+  <!-- <link rel="stylesheet" href="styl.css" /> -->
+  <!-- <link rel="stylesheet" href="common.css" /> -->
+   <style>
+    :root{
+  --teal:#1F6F6A;
+  --teal-2:#2FA39C;
+  --ink:#173132;
+  --muted:#6B8080;
+  --bg:#F2FBFA;
+  --bg-2:#EAF7F6;
+  --card:#FFFFFF;
+  --line: rgba(23,49,50,.10);
+  --shadow: 0 20px 45px rgba(23,49,50,.12);
+  --shadow-soft: 0 15px 35px rgba(23,49,50,.10);
+  --container: 1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background: linear-gradient(180deg, var(--bg) 0%, #fff 70%);
+}
+.wrap{max-width:var(--container); margin:0 auto; padding:0 24px}
+
+/* ============ TOPBAR ============ */
+.topbar{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.topbar-inner{
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:inherit;
+}
+.brand-mark{
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  font-size:15px;
+  font-weight:900;
+  color:var(--teal);
+  background:var(--bg-2);
+  border:1px solid rgba(31,111,106,.25);
+}
+.brand-name{
+  font-weight:900;
+  font-size:17px;
+  color:var(--teal);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:11px;
+  flex-wrap:wrap;
+}
+.nav a{
+  text-decoration:none;
+  color:rgba(23,49,50,.72);
+  font-weight:800;
+  padding:6px 8px;
+  border-radius:999px;
+}
+.nav a:hover{ color:var(--teal); background: rgba(234,247,246,.8); }
+.nav a.active{ color:var(--teal-2); }
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn{
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:10.5px;
+  font-weight:900;
+  cursor:pointer;
+}
+.btn-outline{
+  background:#fff;
+  color:var(--teal);
+  border-color: rgba(31,111,106,.35);
+}
+.btn-solid{
+  background: var(--teal-2);
+  color:#fff;
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(47,163,156,.20);
+}
+/* ============ PAGE ============ */
+.page{min-height:calc(100vh - 72px); padding:48px 0 64px;}
+
+.title{
+  margin:0 0 40px;
+  text-align:center;
+  font-size:28px;
+  font-weight:900;
+  color:var(--teal);
+  letter-spacing: -0.5px;
+}
+
+/* ============ MAP AREA ============ */
+.map-shell{
+  display:flex;
+  justify-content:center;
+  padding: 0 0 32px;
+}
+
+.map-card{
+  width:min(560px, 94vw);
+  background:var(--card);
+  border-radius:24px;
+  box-shadow: var(--shadow);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+/* Map header */
+.map-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px 20px;
+  background: linear-gradient(180deg, #d8efee, #e9f7f6);
+  border-bottom:1px solid rgba(23,49,50,.08);
+}
+
+.map-head-ico{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1.5px solid rgba(23,49,50,.12);
+  background:#f4fbfb;
+  color:var(--teal);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition: all 0.2s;
+}
+.map-head-ico:hover{
+  background:#eef9f8;
+  transform: scale(1.05);
+}
+
+.map-head-txt{
+  flex:1;
+  text-align:center;
+  padding-right:44px;
+}
+.map-head-title{
+  font-weight:900;
+  font-size:18px;
+  color:var(--teal);
+  letter-spacing: -0.3px;
+}
+.map-head-sub{
+  margin-top:4px;
+  font-size:13px;
+  font-weight:600;
+  color: rgba(23,49,50,.60);
+}
+
+/* Map body */
+.map-body{
+  position:relative;
+  padding:24px 20px 28px;
+  background:#fff;
+}
+
+.map-controls{
+  position:absolute;
+  left:20px;
+  top:100px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  z-index:3;
+}
+.ctl-pill{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  background:#f2fbfb;
+  border:1.5px solid rgba(23,49,50,.12);
+  color:var(--teal);
+  display:grid;
+  place-items:center;
+  box-shadow: 0 12px 24px rgba(23,49,50,.10);
+  cursor:pointer;
+  transition: all 0.2s;
+}
+.ctl-pill:hover{
+  background:#eef9f8;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(23,49,50,.14);
+}
+
+.map-canvas{
+  width:100%;
+  min-height:440px;
+  display:grid;
+  place-items:center;
+  padding:80px 0 20px;
+}
+.map-svg{
+  width: 100%;
+  max-width: 480px;
+  height:auto;
+  border-radius:20px;
+  border:1px solid rgba(23,49,50,.06);
+  box-shadow: 0 12px 28px rgba(23,49,50,.10);
+}
+
+/* ============ CTA BUTTON ============ */
+.cta-row{
+  display:flex;
+  justify-content:center;
+  padding: 20px 0 0;
+}
+.cta{
+  min-width: 420px;
+  max-width: 94vw;
+  border:none;
+  border-radius:999px;
+  padding:16px 32px;
+  font-size:15px;
+  font-weight:900;
+  color:#fff;
+  cursor:pointer;
+  background: var(--teal);
+  box-shadow: 0 16px 32px rgba(31,111,106,.20);
+  transition: all 0.3s ease;
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
+.cta:hover{
+  background: var(--teal-2);
+  box-shadow: 0 18px 36px rgba(31,111,106,.26);
+  transform: translateY(-2px);
+}
+
+/* ============ FOOTER ============ */
+.footer{
+  margin-top:80px;
+  background: var(--bg-2);
+  border-top:1px solid var(--line);
+  padding: 32px 0;
+}
+.footgrid{
+  display:grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 32px;
+  align-items:start;
+  font-size:14px;
+  color: rgba(23,49,50,.70);
+}
+.foot-title{
+  font-weight:900;
+  font-size: 16px;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+.foot-col-title{
+  font-weight:900;
+  font-size: 15px;
+  color: rgba(23,49,50,.85);
+  margin-bottom: 12px;
+}
+.foot-text{
+  margin: 8px 0;
+  line-height: 1.6;
+}
+.foot-link{
+  display:block;
+  margin: 10px 0;
+  text-decoration:none;
+  font-weight:700;
+  color: rgba(31,111,106,.90);
+  transition: color 0.2s;
+}
+.foot-link:hover{
+  color: var(--teal);
+  text-decoration:underline;
+}
+
+@media (max-width: 980px){
+  .nav{display:none}
+  .footgrid{
+    grid-template-columns:1fr;
+    gap: 24px;
+  }
+  .title{font-size: 24px;}
+  .map-card{width:min(480px, 94vw);}
+  .map-canvas{min-height:380px; padding:60px 0 16px;}
+  .map-controls{left:16px; top:80px;}
+  .ctl-pill{width:40px; height:40px;}
+  .cta{min-width:320px;}
+}
+   </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">EM</span>
+        <span class="brand-name">EspritMed</span>
+      </a>
+
+      <nav class="nav">
+        <a href="home.html">Accueil</a>
+        <a href="index.html">Fiche medicale</a>
+        <a href="rendezvouz.html">Rendez-vous</a>
+        <a href="ind.html">Espace Consultation</a>
+        <a href="loc.html" class="active" aria-current="page">A propos de nous</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn btn-outline" type="button">Se connecter</button>
+        <button class="btn btn-solid" type="button">S'inscrire</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page -->
+  <main class="page">
+    <section class="wrap content">
+      <h1 class="title">Localisation des cabinets dans le campus</h1>
+
+      <div class="map-shell">
+        <article class="map-card" aria-label="Esprit Map">
+          <header class="map-head">
+            <button class="map-head-ico" type="button" aria-label="Paramètres carte">
+              <!-- petit icon rond gauche -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 7v5l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <div class="map-head-txt">
+              <div class="map-head-title">Esprit Map</div>
+              <div class="map-head-sub">Campus Esprit — Centre de santé</div>
+            </div>
+          </header>
+
+          <div class="map-body">
+            <!-- mini contrôles à gauche (comme sur capture) -->
+            <div class="map-controls" aria-hidden="true">
+              <div class="ctl-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="ctl-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 10.5a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- “carte” (SVG) -->
+            <div class="map-canvas">
+              <svg class="map-svg" viewBox="0 0 560 360" role="img" aria-label="Carte du campus (maquette)">
+                <!-- fond -->
+                <rect x="0" y="0" width="560" height="360" rx="18" fill="#eaf7f6"/>
+                <!-- routes -->
+                <path d="M285 10 L305 350" stroke="#d7ecea" stroke-width="10" opacity=".9"/>
+                <path d="M60 190 L520 190" stroke="#d7ecea" stroke-width="10" opacity=".65"/>
+                <path d="M110 45 L250 160" stroke="#d7ecea" stroke-width="8" opacity=".7"/>
+
+                <!-- blocs (formes arrondies / semi-cercles) -->
+                <path d="M120 90
+                         A120 120 0 0 1 360 90
+                         L360 135
+                         A120 120 0 0 0 120 135 Z"
+                      fill="#cfe8e6" stroke="#b9ddda"/>
+                <text x="270" y="112" text-anchor="middle" font-size="14" fill="#21484c" font-weight="700">Bloc A</text>
+
+                <path d="M-30 290
+                         A160 160 0 0 1 200 290
+                         L200 360
+                         L-30 360 Z"
+                      fill="#cfe8e6" stroke="#b9ddda"/>
+                <text x="80" y="270" text-anchor="middle" font-size="14" fill="#21484c" font-weight="700">Bloc C</text>
+
+                <path d="M390 250
+                         A140 140 0 0 1 640 250
+                         L640 360
+                         L390 360 Z"
+                      fill="#cfe8e6" stroke="#b9ddda"/>
+                <text x="470" y="230" text-anchor="middle" font-size="14" fill="#21484c" font-weight="700">Bloc M</text>
+
+                <!-- pins + labels -->
+                <g transform="translate(250,142)">
+                  <circle cx="0" cy="0" r="10" fill="#ff5a5f"/>
+                  <circle cx="0" cy="0" r="4" fill="#fff"/>
+                  <text x="0" y="28" text-anchor="middle" font-size="11" fill="#1f2f33">Dr. Ali</text>
+                </g>
+
+                <g transform="translate(85,312)">
+                  <circle cx="0" cy="0" r="10" fill="#ff5a5f"/>
+                  <circle cx="0" cy="0" r="4" fill="#fff"/>
+                  <text x="0" y="28" text-anchor="middle" font-size="11" fill="#1f2f33">Dr. Fedi</text>
+                </g>
+
+                <g transform="translate(505,312)">
+                  <circle cx="0" cy="0" r="10" fill="#ff5a5f"/>
+                  <circle cx="0" cy="0" r="4" fill="#fff"/>
+                  <text x="0" y="28" text-anchor="middle" font-size="11" fill="#1f2f33">Dr. Imen</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="cta-row">
+        <button class="cta" type="button" ><a href="ass.html" style="color: aliceblue; text-decoration: none;">Discuter avec le chatbot</a></button>
+      </div>
+    </section>
+   
+
+    <!-- Footer -->
+   
+  </main>
+   <footer class="footer">
+      <div class="wrap footgrid">
+        <div>
+          <div class="foot-title">EspritMed</div>
+          <div class="foot-text">Service de santé universitaire — Tunis</div>
+          <div class="foot-text">© Tous droits réservés.</div>
+        </div>
+
+        <div>
+          <div class="foot-col-title">Liens</div>
+          <a href="#confidentialite" class="foot-link">Charte de confidentialité</a>
+          <a href="#conditions" class="foot-link">Conditions d'utilisation</a>
+          <a href="#accessibilite" class="foot-link">Accessibilité</a>
+        </div>
+
+        <div>
+          <div class="foot-col-title">Contact</div>
+          <a href="mailto:sante@univ.tn" class="foot-link">sante@univ.tn</a>
+          <a href="tel:+21600000000" class="foot-link">+216 00 000 000</a>
+          <div class="foot-text">Av. de l'Université, Tunis</div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

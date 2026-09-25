@@ -1,0 +1,46 @@
+/* Fichier custom_contact_styles.css */
+
+/*
+    Les styles suivants sont nécessaires pour assurer l'aspect
+    de la fusion des cellules et des bordures internes du formulaire
+    qui repose sur une structure de tableau (<table>).
+*/
+
+/* Assure que les inputs remplissent bien leur moitié de cellule sans padding */
+.contact-form table td input, 
+.contact-form table td textarea {
+    /* Tailwind gère la plupart des styles, mais ce style est une précaution pour l'héritage de la table */
+    border: none !important;
+    padding: 1rem;
+}
+
+/* Fixe la hauteur de la ligne 'Sujet' et 'Message' pour un alignement propre */
+.contact-form table tr:nth-child(3) td:first-child,
+.contact-form table tr:nth-child(4) td:first-child {
+    width: 120px; /* Taille fixe pour le label de gauche */
+}
+
+
+/* Media Query pour les petits écrans (reproduit les ajustements CSS originaux) */
+@media (max-width: 640px) {
+    /* Cache les libellés de la première ligne (Name/Email) sur mobile */
+    .contact-form td:first-child {
+        display: block;
+        width: 100%;
+    }
+    .contact-form td:first-child span {
+        display: none; /* Cache les labels Name/Email */
+    }
+    
+    /* Les inputs Nom/Email prennent toute la largeur sur mobile */
+    .contact-form table tr:nth-child(2) input {
+        width: 100% !important;
+        border-right: none !important; 
+    }
+    
+    /* Cache les libellés Subject/Message (pour le design plus compact) */
+    .contact-form table tr:nth-child(3) td:first-child,
+    .contact-form table tr:nth-child(4) td:first-child {
+        display: none; 
+    }
+}

@@ -1,0 +1,101 @@
+/* Fichier magazine_custom_styles.css */
+
+/*
+   La majorité du style est gérée par les classes Tailwind dans le HTML.
+   Ce fichier est ici pour respecter l'exigence de séparation HTML/CSS,
+   mais n'a pas besoin de contenu substantiel pour ce design.
+*/
+
+/* Exemple pour des styles de base ou des polices si vous en aviez */
+/*
+body {
+    font-family: 'Roboto', sans-serif;
+}
+*/
+
+/* Styles spécifiques qui pourraient ne pas être purement utilitaires */
+
+/* Style pour l'image de bannière (si vous ne voulez pas utiliser le style inline)
+.magazine-banner {
+    background-image: url('votre_image_de_fond.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 256px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+*/
+
+.hero-banner {
+    position: relative;
+    height: 200px;
+    background: url('img/magazinbloc.png') center center/cover no-repeat;
+    background-color: #ccc; /* couleur de secours */
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 60px;
+    padding-bottom: 30px;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-title {
+    color: var(--white);
+    font-size: 2.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Titres Contact et Contact */
+.contact-title,
+.contact-subtitle {
+    color: #2B7A78 !important;
+    letter-spacing: 2px;
+}
+
+/* Icônes Contact */
+.contact-icon {
+    color: #2B7A78 !important;
+}
+
+/* Titres des cartes Contact */
+.contact-card-title {
+    color: #2B7A78 !important;
+}
+
+/* Texte des cartes Contact */
+.contact-card-text {
+    color: #2B7A78 !important;
+}
+
+/* Footer */
+footer {
+    background-color: #E6F7F7 !important;
+    border-top: 1px solid #B2DFDF !important;
+}
+
+.footer-title {
+    color: #2B7A78 !important;
+}
+
+.footer-text {
+    color: #2B7A78 !important;
+}
+
+.footer-link {
+    color: #2B7A78 !important;
+    cursor: pointer;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+

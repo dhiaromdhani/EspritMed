@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Ajoute ceci dans le <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!--<title>Magazine/Blog - EspritMed</title>-->
+    
+     <!-- Ajoute ce lien dans le <head> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-teal': '#008080',       /* Bleu-vert principal */
+                        'secondary-light': '#e6f7f7',    /* Vert très clair pour les fonds et cartes */
+                        'text-dark': '#555',             /* Gris foncé pour le texte principal */
+                        'text-light': '#666',            /* Gris clair pour le texte secondaire */
+                        'bg-light': '#f7f7f7',           /* Fond de la page */
+                        'border-light': '#e0e0e0',       /* Bordures */
+                        'card-dark': '#2e8b8b',          /* Vert foncé pour certaines cartes */
+                    },
+                    backgroundImage: theme => ({
+                        // Placeholder pour l'image de bannière (remplacez 'your-banner-image.jpg' par votre chemin)
+                        'magazine-banner': "url('your-banner-image.jpg')",
+                    })
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="Actualiter.css">
+</head>
+
+<body class="bg-white">
+
+    <header class="flex justify-between items-center px-5 lg:px-10 py-4 shadow-md bg-white">
+        <div class="flex items-center space-x-2">
+        <span class="flex items-center justify-center w-10 h-10 rounded-[10px] border-4 border-[#3AAFA9] bg-[#E2F4F1] text-[#2B7A78] font-extrabold text-base" style="font-family: Arial, sans-serif;">EM</span>
+        <span class="text-[#3AAFA9] font-bold text-xl">EspritMed</span>
+        </div>
+        
+        <nav class="hidden md:flex space-x-6 text-text-dark">
+        <a href="../homepage/home.html" class="hover:text-teal-600 transition">
+            Accueil
+        </a>            <a href="AboutUs.html" class="hover:text-primary-teal">À propos de nous</a>
+            <a href="#" class="hover:text-primary-teal">Médecins</a>
+            <a href="#" class="hover:text-primary-teal">Rendez-vous</a>
+            <a href="#" class="hover:text-primary-teal">File d'attente</a>
+            <a href="#" class="text-primary-teal font-bold border-b-2 border-primary-teal">Actualités</a>
+            <a href="FAQ.html" class="hover:text-primary-teal">FAQ</a>
+        </nav>
+        <div class="flex space-x-3">
+            <a href="#" class="px-4 py-2 border border-primary-teal text-primary-teal rounded-md font-semibold hover:bg-secondary-light transition">Se connecter</a>
+            <a href="#" class="px-4 py-2 bg-primary-teal text-white rounded-md font-semibold hover:bg-opacity-90 transition">S'inscrire</a>
+        </div>
+    </header>
+
+    <section class="w-full flex justify-center items-center bg-white" style="padding: 0;">
+    <img src="img/magazinbloc.png" alt="Magazine/Blog" style="width: 100%; max-width: 100vw; height: auto; display: block;">
+    </section>
+
+    <main class="max-w-7xl mx-auto p-4 lg:p-10 flex flex-col lg:flex-row gap-10">
+        
+        <div class="w-full lg:w-2/3 space-y-12">
+
+            <article class="border border-border-light rounded-lg overflow-hidden shadow-lg">
+                <img src="img/medcin.png" alt="Équipe médicale" class="w-full h-80 object-cover">
+                <div class="p-6">
+                    <div class="flex items-center space-x-4 text-sm text-text-light mb-4">
+                        <span>🗓️ Lundi 05, Septembre, 2025</span>
+                        <span>👤 Nefzi Firas</span>
+                        <span>🤍 68</span>
+                        <span>💬 86</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-text-dark mb-4">Mieux comprendre les patients au cœur de notre service en ligne : pourquoi leur confort est notre priorité.</h2>
+                    <p class="text-text-light mb-6">Nous explorons comment passer le cœur de notre service en ligne, en utilisant pour la première fois les données pour créer une expérience patient de haute qualité.</p>
+                    <a href="#" class="text-primary-teal font-semibold hover:underline">Lire l'article</a>
+                    <button class="px-6 py-2 bg-primary-teal text-white rounded-md ml-4 hover:bg-opacity-90 transition">Accéder</button>
+                </div>
+            </article>
+
+            <article class="border-b border-border-light pb-6">
+                <img src="img/medecinOscilloscope.png" alt="Un médecin avec un stéthoscope" class="w-full h-72 object-cover mb-6">
+                <div class="flex items-center space-x-4 text-sm text-text-light mb-4">
+                    <span>🗓️ Lundi 26, Septembre, 2025</span>
+                    <span>👤 Mohamed Bjeaoui</span>
+                    <span>🤍 76</span>
+                    <span>💬 54</span>
+                </div>
+                <h2 class="text-xl font-bold text-text-dark mb-4">L'importance de la prévention dans la santé étudiante</h2>
+                <p class="text-text-light mb-6">La prévention joue un rôle essentiel dans le bien-être des étudiants. Adopter une alimentation équilibrée, pratiquer une activité physique régulière et gérer le stress contribuent à maintenir une bonne santé mentale et physique. Les services médicaux universitaires offrent souvent des conseils et dépistages gratuits : une occasion à ne pas manquer pour rester en forme tout au long de l’année.</p>
+                <button class="px-6 py-2 border border-primary-teal text-primary-teal rounded-md hover:bg-secondary-light transition">Lire la suite</button>
+            </article>
+
+            <article class="border-b border-border-light pb-6">
+                <img src="img/femme-portant-un-masque.png" alt="Femme portant un masque" class="w-full h-72 object-cover mb-6">
+                <div class="flex items-center space-x-4 text-sm text-text-light mb-4">
+                    <span>🗓️ Lundi 26, Septembre, 2025</span>
+                    <span>👤 Digital Flow</span>
+                    <span>🤍 68</span>
+                    <span>💬 56</span>
+                </div>
+                <h2 class="text-xl font-bold text-text-dark mb-4">Le sommeil, un pilier oublié de la santé</h2>
+                <p class="text-text-light mb-6">Dormir suffisamment est aussi important que bien manger ou faire du sport. Le manque de sommeil peut affaiblir le système immunitaire, augmenter le stress et diminuer la concentration. Pour une meilleure qualité de vie, il est recommandé de dormir entre 7 et 8 heures par nuit et d’éviter les écrans avant le coucher.</p>
+                <button class="px-6 py-2 border border-primary-teal text-primary-teal rounded-md hover:bg-secondary-light transition">Lire la suite</button>
+            </article>
+
+        </div>
+        
+        <div class="w-full lg:w-1/3 space-y-8">
+            
+            <div class="relative">
+                <input type="text" placeholder="Rechercher ici" class="w-full py-3 px-10 border border-border-light rounded-md focus:outline-none focus:ring-1 focus:ring-primary-teal">
+                <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-border-light">
+                <h3 class="text-lg font-bold text-text-dark mb-4 border-b pb-2">Anciens Articles</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start space-x-3">
+                        <img src="img/1.png"  class="w-16 h-16 object-cover rounded">
+                        <div>
+                            <p class="text-xs text-text-light">Lundi 05, Septembre, 2025</p>
+                            <a href="#" class="text-sm text-text-dark hover:text-primary-teal font-medium">L’importance de la prévention dans la santé étudiante </a>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <img src="img/2.png"  class="w-16 h-16 object-cover rounded">
+                        <div>
+                            <p class="text-xs text-text-light">Lundi 26, Septembre, 2025</p>
+                            <a href="#" class="text-sm text-text-dark hover:text-primary-teal font-medium">L'alimentation saine pour les étudiants : idées et astuces.</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <img src="img/3.png" class="w-16 h-16 object-cover rounded">
+                        <div>
+                            <p class="text-xs text-text-light">mardi 02, juin, 2025</p>
+                            <a href="#" class="text-sm text-text-dark hover:text-primary-teal font-medium">Gérer le stress des examens avec la méditation.</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-border-light">
+                <h3 class="text-lg font-bold text-text-dark mb-4 border-b pb-2">Catégories</h3>
+                <ul class="space-y-3">
+                    <li class="flex justify-between items-center text-text-dark">
+                        <a href="#" class="hover:text-primary-teal">Santé générale</a>
+                        <span class="text-primary-teal text-sm">34</span>
+                    </li>
+                    <li class="flex justify-between items-center text-text-dark">
+                        <a href="#" class="hover:text-primary-teal">Nutrition</a>
+                        <span class="text-primary-teal text-sm">21</span>
+                    </li>
+                    <li class="flex justify-between items-center text-text-dark">
+                        <a href="#" class="hover:text-primary-teal">Bien-être</a>
+                        <span class="text-primary-teal text-sm">11</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <!-- PAGINATION -->
+    <div class="flex justify-between items-center max-w-6xl mx-auto my-12">
+        <a href="#" class="px-10 py-6 bg-[#3AAFA9] text-white rounded-sm font-medium flex items-center gap-2 hover:bg-[#2B7A78] transition">
+            &#8592; Page précédente
+        </a>
+        <div class="text-[#3AAFA9] font-medium space-x-2">
+            <span>1</span> - 
+            <span>2</span> - 
+            <span>3</span> - 
+            <span>4</span> - 
+            <span>5</span>
+        </div>
+        <a href="#" class="px-10 py-6 bg-[#3AAFA9] text-white rounded-sm font-medium flex items-center gap-2 hover:bg-[#2B7A78] transition">
+            Page suivant &#8594;
+        </a>
+    </div>
+    <!-- ================= CONTACT ================= -->
+<section class="max-w-6xl mx-auto px-6 py-20 text-center">
+    <p class="contact-title text-sm tracking-widest font-semibold mb-2">
+        CONTACTEZ-NOUS
+    </p>
+    <h2 class="contact-subtitle text-3xl font-serif mb-12">
+        Contact
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+        <!-- URGENCE -->
+        <a href="ContactUs.html"
+           class="block bg-[#E6F7F7] p-8 rounded-xl text-left
+                  transition hover:shadow-lg hover:-translate-y-1">
+            <i class="fa-solid fa-phone text-3xl contact-icon mb-4"></i>
+            <h4 class="font-bold contact-card-title uppercase mb-2">Urgence</h4>
+            <p class="text-sm contact-card-text">(237) 681-812-255</p>
+            <p class="text-sm contact-card-text">(237) 666-331-894</p>
+        </a>
+
+        <!-- LOCALISATION -->
+        <a href="ContactUs.html"
+           class="block bg-white border border-[#2B7A78] p-8 rounded-xl text-left
+                  transition hover:shadow-lg hover:-translate-y-1">
+            <i class="fa-solid fa-location-dot text-3xl contact-icon mb-4"></i>
+            <h4 class="font-bold contact-card-title uppercase mb-2">Localisation</h4>
+            <p class="text-sm contact-card-text">
+                100 pôle Technologique<br>
+                El ghazela2083 Ariana
+            </p>
+        </a>
+
+        <!-- EMAIL -->
+        <a href="ContactUs.html"
+           class="block bg-[#E6F7F7] p-8 rounded-xl text-left
+                  transition hover:shadow-lg hover:-translate-y-1">
+            <i class="fa-solid fa-envelope text-3xl contact-icon mb-4"></i>
+            <h4 class="font-bold contact-card-title uppercase mb-2">Email</h4>
+            <p class="text-sm contact-card-text">Medesprit@gmail.com</p>
+        </a>
+
+        <!-- HEURES -->
+        <a href="ContactUs.html"
+           class="block bg-[#E6F7F7] p-8 rounded-xl text-left shadow
+                  transition hover:shadow-lg hover:-translate-y-1">
+            <i class="fa-solid fa-clock text-3xl contact-icon mb-4"></i>
+            <h4 class="font-bold contact-card-title uppercase mb-2">Heure de travail</h4>
+            <p class="text-sm contact-card-text">
+                Lun–Ven 09:00–18:00<br>
+                samedi et dimanche<br>
+                juste pour<br>
+                les cas d’urgence
+            </p>
+        </a>
+
+    </div>
+</section>
+
+
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-[#E6F7F7] border-t border-[#B2DFDF] py-12">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <!-- COL 1 -->
+        <div>
+            <h4 class="footer-title text-lg font-bold mb-3">EspritMed</h4>
+            <p class="footer-text text-sm mb-2">
+                Service de santé universitaire — Tunis
+            </p>
+            <p class="footer-text text-xs mt-4">
+                © 2025 Tous droits réservés.
+            </p>
+        </div>
+
+        <!-- COL 2 -->
+        <div>
+            <h4 class="footer-title text-lg font-bold mb-3">Liens</h4>
+            <ul class="space-y-2 text-sm">
+                <li class="footer-link">Charte de confidentialité</li>
+                <li class="footer-link">Conditions d’utilisation</li>
+                <li class="footer-link">Accessibilité</li>
+            </ul>
+        </div>
+
+        <!-- COL 3 -->
+        <div>
+            <h4 class="footer-title text-lg font-bold mb-3">Contact</h4>
+            <ul class="space-y-2 text-sm">
+                <li class="footer-text">sante@univ.tn</li>
+                <li class="footer-text">+216 00 000 000</li>
+                <li class="footer-text">Av. de l’Université, Tunis</li>
+            </ul>
+        </div>
+
+    </div>
+</footer>
+</body>
+</html>

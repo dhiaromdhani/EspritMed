@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Prendre un rendez-vous</title>
+  <style>
+:root{
+  --teal:#1F6F6A;
+  --teal-2:#2FA39C;
+  --ink:#173132;
+  --muted:#6B8080;
+  --bg:#F2FBFA;
+  --bg-2:#EAF7F6;
+  --card:#FFFFFF;
+  --line: rgba(23,49,50,.10);
+  --shadow: 0 20px 45px rgba(23,49,50,.12);
+  --shadow-soft: 0 15px 35px rgba(23,49,50,.10);
+  --container: 1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background:#fff;
+}
+main{flex:1}
+.container{max-width:var(--container); margin:0 auto; padding:0 24px}
+
+/* ============ HEADER ============ */
+.site-header{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.header-inner{
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:inherit;
+}
+.mark{
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  font-size:15px;
+  font-weight:900;
+  color:var(--teal);
+  background:var(--bg-2);
+  border:1px solid rgba(31,111,106,.25);
+}
+.brand-name{
+  font-weight:900;
+  font-size:17px;
+  color:var(--teal);
+}
+
+.nav-desktop{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:11px;
+  flex-wrap:wrap;
+}
+.nav-desktop a{
+  text-decoration:none;
+  color:rgba(23,49,50,.72);
+  font-weight:800;
+  padding:6px 8px;
+  border-radius:999px;
+  transition: all 0.2s;
+}
+.nav-desktop a:hover{ color:var(--teal); background: rgba(234,247,246,.8); }
+.nav-desktop a.active{ color:var(--teal-2); }
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn{
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:10.5px;
+  font-weight:900;
+  cursor:pointer;
+  transition: all 0.2s;
+  text-decoration:none;
+  display:inline-block;
+}
+.btn-ghost{
+  background:#fff;
+  color:var(--teal);
+  border-color: rgba(31,111,106,.35);
+}
+.btn-ghost:hover{
+  background:var(--bg-2);
+  border-color: var(--teal);
+}
+.btn-solid{
+  background: var(--teal-2);
+  color:#fff;
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(47,163,156,.20);
+}
+.btn-solid:hover{
+  background: var(--teal);
+  box-shadow: 0 12px 24px rgba(47,163,156,.26);
+}
+/* ============ PAGE ============ */
+.page{
+  background: linear-gradient(180deg, var(--bg) 0%, #fff 70%);
+  padding: 48px 0 64px;
+}
+
+/* ============ HERO CARD ============ */
+.hero-card{
+  max-width:920px;
+  margin:24px auto 0;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:36px 36px 40px;
+}
+
+.hero-head{
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(23,49,50,.08);
+}
+.hero-head h1{
+  margin:0;
+  font-size:28px;
+  font-weight:900;
+  color:var(--teal);
+  letter-spacing:-0.5px;
+}
+.hero-head p{
+  margin:10px 0 0;
+  font-size:15px;
+  font-weight:600;
+  color:rgba(23,49,50,.60);
+  line-height:1.5;
+}
+
+.hero-body{
+  padding-top:24px;
+}
+
+/* ============ FORM ============ */
+.form-card form{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.field label{
+  font-size:14px;
+  font-weight:800;
+  color:var(--ink);
+}
+
+/* Select-like doctor picker */
+.select-like{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 18px;
+  background:#fff;
+  border:1.5px solid rgba(23,49,50,.15);
+  border-radius:16px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.select-like:hover{
+  border-color:var(--teal-2);
+  box-shadow:0 0 0 4px rgba(47,163,156,.10);
+}
+
+.doctor-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:1;
+  pointer-events:none;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  background:linear-gradient(135deg, var(--teal-2), var(--teal));
+  border:2px solid rgba(31,111,106,.20);
+  flex-shrink:0;
+}
+
+.doctor-meta{
+  flex:1;
+}
+.doctor-name{
+  font-size:15px;
+  font-weight:800;
+  color:var(--ink);
+}
+.doctor-sub{
+  font-size:13px;
+  font-weight:600;
+  color:rgba(23,49,50,.60);
+  margin-top:2px;
+}
+
+.select-like select{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  cursor:pointer;
+}
+
+.chev{
+  font-size:18px;
+  color:var(--teal);
+  pointer-events:none;
+}
+
+/* Grid 2 */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.subfield{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.sub-label{
+  font-size:12px;
+  font-weight:800;
+  color:rgba(23,49,50,.65);
+  letter-spacing:0.3px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+.input-wrap input{
+  width:100%;
+  height:48px;
+  padding:0 48px 0 16px;
+  border:1.5px solid rgba(23,49,50,.15);
+  border-radius:14px;
+  font-size:14px;
+  font-family:inherit;
+  outline:none;
+  transition:all 0.2s;
+}
+.input-wrap input:focus{
+  border-color:var(--teal-2);
+  box-shadow:0 0 0 4px rgba(47,163,156,.15);
+}
+
+.input-wrap .icon{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--teal);
+  pointer-events:none;
+}
+
+/* Chips */
+.chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.chip{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border:1.5px solid rgba(47,163,156,.25);
+  background:rgba(234,247,246,.6);
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+  color:var(--teal);
+}
+
+.chip-ic{
+  display:flex;
+  color:var(--teal-2);
+}
+
+.chip-soft{
+  background:#fff;
+  border-color:rgba(23,49,50,.12);
+  color:var(--ink);
+  font-size:13px;
+}
+
+.chip-title{
+  color:rgba(23,49,50,.60);
+  font-weight:600;
+}
+
+.chip-text{
+  font-weight:800;
+}
+
+/* Textarea */
+textarea{
+  width:100%;
+  padding:14px 16px;
+  border:1.5px solid rgba(23,49,50,.15);
+  border-radius:14px;
+  font-size:14px;
+  font-family:inherit;
+  resize:vertical;
+  min-height:100px;
+  outline:none;
+  transition:all 0.2s;
+}
+textarea:focus{
+  border-color:var(--teal-2);
+  box-shadow:0 0 0 4px rgba(47,163,156,.15);
+}
+textarea::placeholder{
+  color:rgba(23,49,50,.40);
+}
+
+/* Primary button */
+.btn-primary{
+  width:100%;
+  border:none;
+  background:var(--teal);
+  color:#fff;
+  padding:16px 32px;
+  font-size:15px;
+  font-weight:900;
+  border-radius:999px;
+  box-shadow:0 16px 32px rgba(31,111,106,.20);
+  transition:all 0.3s ease;
+  margin-top:8px;
+}
+.btn-primary:hover{
+  background:var(--teal-2);
+  box-shadow:0 18px 36px rgba(31,111,106,.26);
+  transform:translateY(-2px);
+}
+.btn-primary:active{
+  transform:translateY(0px);
+}
+.btn-primary:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* ============ FOOTER ============ */
+.site-footer{
+  background:var(--bg-2);
+  border-top:1px solid var(--line);
+  padding:32px 0;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:32px;
+  font-size:14px;
+}
+.footer-title{
+  font-weight:900;
+  font-size:16px;
+  color:var(--teal);
+  margin-bottom:10px;
+}
+.footer-col a{
+  display:block;
+  margin:10px 0;
+  text-decoration:none;
+  font-weight:700;
+  color:rgba(31,111,106,.90);
+  transition:color 0.2s;
+}
+.footer-col a:hover{
+  color:var(--teal);
+  text-decoration:underline;
+}
+.footer-muted{
+  margin:8px 0;
+  color:rgba(23,49,50,.70);
+  line-height:1.6;
+}
+
+/* Modal */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.5);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.active{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 24px 60px rgba(0,0,0,.25);
+  max-width:520px;
+  width:100%;
+  padding:36px;
+  animation:slideUp 0.3s ease;
+}
+
+@keyframes slideUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.modal-icon{
+  width:60px;
+  height:60px;
+  border-radius:999px;
+  background:linear-gradient(135deg, var(--teal-2), var(--teal));
+  display:grid;
+  place-items:center;
+  margin:0 auto 20px;
+  color:#fff;
+  font-size:28px;
+}
+
+.modal h2{
+  margin:0 0 12px;
+  font-size:24px;
+  font-weight:900;
+  color:var(--teal);
+  text-align:center;
+}
+
+.modal p{
+  margin:0 0 24px;
+  font-size:15px;
+  font-weight:600;
+  color:rgba(23,49,50,.70);
+  text-align:center;
+  line-height:1.6;
+}
+
+.modal-details{
+  background:var(--bg-2);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:24px;
+}
+
+.detail-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid rgba(23,49,50,.08);
+}
+.detail-row:last-child{
+  border-bottom:none;
+}
+
+.detail-label{
+  font-size:13px;
+  font-weight:700;
+  color:rgba(23,49,50,.60);
+}
+
+.detail-value{
+  font-size:14px;
+  font-weight:800;
+  color:var(--ink);
+  text-align:right;
+}
+
+.modal-actions{
+  display:flex;
+  gap:12px;
+}
+
+.btn-secondary{
+  flex:1;
+  border:1.5px solid rgba(23,49,50,.15);
+  background:#fff;
+  color:var(--ink);
+}
+.btn-secondary:hover{
+  background:var(--bg-2);
+}
+
+@media (max-width:980px){
+  .nav-desktop{display:none}
+  .grid-2{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr; gap:24px;}
+  .hero-card{padding:28px 24px 32px;}
+  .hero-head h1{font-size:24px;}
+}
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="home.html">
+        <span class="mark">EM</span>
+        <span class="brand-name">EspritMed</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <a href="home.html">Accueil</a>
+        <a href="index.html">Fiche medicale</a>
+        <a class="active" href="rendezvouz.html" aria-current="page">Rendez-vous</a>
+        <a href="ind.html">Espace Consultation</a>
+        <a href="loc.html">A propos de nous</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="#">Se connecter</a>
+        <a class="btn btn-solid" href="#">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero-card">
+        <div class="hero-head">
+          <h1>Prendre un rendez-vous</h1>
+          <p>Choisissez un médecin, un créneau, précisez la raison de votre visite, puis validez.</p>
+        </div>
+
+        <div class="hero-body">
+          <div class="form-card">
+            <form id="appointmentForm">
+              <div class="field">
+                <label for="doctor">Choisir un médecin</label>
+
+                <div class="select-like">
+                  <div class="doctor-left">
+                    <div class="avatar" aria-hidden="true"></div>
+                    <div class="doctor-meta">
+                      <div class="doctor-name">Dr Amel Ben Salah</div>
+                      <div class="doctor-sub">Médecine générale • Campus Esprit</div>
+                    </div>
+                  </div>
+
+                  <select id="doctor" name="doctor" aria-label="Choisir un médecin">
+                    <option value="Dr Amel Ben Salah — Médecine générale" selected>Dr Amel Ben Salah — Médecine générale</option>
+                    <option value="Dr Youssef Trabelsi — Cardiologie">Dr Youssef Trabelsi — Cardiologie</option>
+                    <option value="Dr Ines Mabrouk — Dermatologie">Dr Ines Mabrouk — Dermatologie</option>
+                  </select>
+
+                  <span class="chev" aria-hidden="true">▾</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Date &amp; heure</label>
+
+                <div class="grid-2">
+                  <div class="subfield">
+                    <span class="sub-label">Date</span>
+                    <div class="input-wrap">
+                      <input type="date" name="date" id="appointmentDate" required />
+                      <span class="icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                          <path d="M7 2v2M17 2v2M3.5 9h17M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"
+                                fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="subfield">
+                    <span class="sub-label">Heure &amp; attente estimée</span>
+
+                    <div class="chips">
+                      <div class="chip">
+                        <span class="chip-ic" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M12 7v6l4 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"
+                                  fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                        <span class="chip-text">10:00</span>
+                      </div>
+
+                      <div class="chip chip-soft">
+                        <span class="chip-title">Attente estimée :</span>
+                        <span class="chip-text">12 min</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="reason">Raison de la visite</label>
+                <textarea id="reason" name="reason" rows="3" placeholder="Ex. : douleur au ventre depuis 2 jours, fatigue, etc." required></textarea>
+              </div>
+
+              <button class="btn btn-primary btn-full" type="submit">Confirmer le rendez-vous</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-title">EspritMed</div>
+        <div class="footer-muted">Service de santé universitaire — Tunis</div>
+        <div class="footer-muted">© <span class="js-year"></span> Tous droits réservés.</div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Liens</div>
+        <a href="#confidentialite">Charte de confidentialité</a>
+        <a href="#conditions">Conditions d'utilisation</a>
+        <a href="#accessibilite">Accessibilité</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <a href="mailto:sante@univ.tn">sante@univ.tn</a>
+        <a href="tel:+21600000000">+216 00 000 000</a>
+        <div class="footer-muted">Av. de l'Université, Tunis</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de confirmation -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+      <div class="modal-icon">✓</div>
+      <h2>Rendez-vous confirmé !</h2>
+      <p>Votre rendez-vous a été enregistré avec succès. Vous recevrez une confirmation par email.</p>
+      
+      <div class="modal-details">
+        <div class="detail-row">
+          <span class="detail-label">Médecin</span>
+          <span class="detail-value" id="confirmDoctor">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Date</span>
+          <span class="detail-value" id="confirmDate">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Heure</span>
+          <span class="detail-value" id="confirmTime">10:00</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Référence</span>
+          <span class="detail-value" id="confirmRef">-</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">Fermer</button>
+        <button class="btn btn-primary" onclick="window.location.href='index.html'">Voir mon dossier</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".js-year").forEach(el => el.textContent = new Date().getFullYear());
+
+    const form = document.getElementById('appointmentForm');
+    const modal = document.getElementById('confirmModal');
+
+    // Set minimum date to today
+    const dateInput = document.getElementById('appointmentDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const doctor = document.getElementById('doctor').value;
+      const date = document.getElementById('appointmentDate').value;
+      const reason = document.getElementById('reason').value;
+      
+      // Validate
+      if (!doctor || !date || !reason) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
+      }
+
+      // Generate reference number
+      const ref = 'RDV-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+      // Format date
+      const dateObj = new Date(date);
+      const formattedDate = dateObj.toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Update modal
+      document.getElementById('confirmDoctor').textContent = doctor.split('—')[0].trim();
+      document.getElementById('confirmDate').textContent = formattedDate;
+      document.getElementById('confirmRef').textContent = ref;
+
+      // Show modal
+      modal.classList.add('active');
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      form.reset();
+      dateInput.value = today;
+    }
+
+    // Close modal on overlay click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

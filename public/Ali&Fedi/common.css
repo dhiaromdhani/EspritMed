@@ -1,0 +1,52 @@
+:root{
+  --footer-height:84px; /* desktop footer height */
+  --footer-height-mobile:140px; /* mobile stacked footer */
+  --page-max-width:1200px; /* content max width for professional layouts */
+  --page-padding:32px; /* generous padding */
+  --muted:#6b7280;
+  --footer-bg:#0f1724;
+  --footer-text:#e6eef2;
+}
+
+/* Layout base */
+html,body{height:100%;margin:0;padding:0}
+body{min-height:100vh;display:flex;flex-direction:column;font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;color:#0f172a;font-size:16px;line-height:1.45;background:#fff}
+
+/* Main area stretches to fill available space so footer sits at bottom */
+main{flex:1;box-sizing:border-box;max-width:var(--page-max-width);width:100%;margin:0 auto;padding:var(--page-padding)}
+
+/* Standard container used across pages */
+.container{max-width:var(--page-max-width);width:100%;margin:0 auto;padding:0 16px;box-sizing:border-box}
+
+/* Make different page wrapper classes consistent */
+.page, .page-bg, .main{display:block}
+
+/* Footer consistency */
+footer{height:var(--footer-height);min-height:var(--footer-height);background:var(--footer-bg);color:var(--footer-text);padding:0 24px;box-sizing:border-box;display:flex;align-items:center}
+.footer, .site-footer{height:var(--footer-height);color:var(--footer-text)}
+
+/* Ensure footer content aligns and wraps nicely */
+/* Footer internal layout: columns with equal spacing */
+.footer .container, .site-footer .container, .footer-content, .footer .wrap{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;width:100%;max-width:var(--page-max-width);margin:0 auto;padding:18px 16px}
+
+/* Each child of container behaves as a footer column */
+.footer .container > div, .site-footer .container > div, .footer-content > div{flex:1;min-width:200px}
+.footer .f-brand, .foot-title, .f-title{font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.footer a, .site-footer a, .f-link, .foot-link{color:rgba(230,238,242,0.95);text-decoration:none}
+.footer .f-text, .footer-muted, .foot-text{color:rgba(230,238,242,0.9);font-size:0.95rem}
+.footer .foot-col-title, .foot-col-title{color:rgba(230,238,242,0.95);font-weight:600;margin-bottom:6px}
+
+/* subtle divider on top of footer on light pages */
+body:not([data-dark]) footer{box-shadow:0 -1px 0 rgba(255,255,255,0.02) inset}
+
+/* Responsive adjustments */
+@media (max-width:900px){
+  :root{--footer-height:var(--footer-height-mobile)}
+  main{padding:18px}
+  .footer .container, .site-footer .container, .footer-content{flex-direction:column;align-items:flex-start;padding:16px}
+  .footer .container > div, .site-footer .container > div{width:100%;min-width:0}
+  footer{height:var(--footer-height-mobile)}
+}
+
+/* Small utilities */
+.wrap{width:100%;max-width:var(--page-max-width);margin:0 auto;padding:0 12px}

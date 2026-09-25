@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Résultats</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind output (and legacy.css imported via src/input.css) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="../homepage/home.html" class="brand">
+        <span class="mark">EM</span> EspritMed
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="find.html" aria-current="page">Médecins</a></li>
+          <li><a href="book.html">Rendez-vous</a></li>
+          <li><a href="live.html">File d’attente</a></li>
+          <li><a href="emg.html">Urgences</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" aria-expanded="false" aria-controls="nav-mobile">
+        ☰ Menu
+      </button>
+
+      <div class="header-actions">
+        <button class="btn btn-outline" data-open-modal="auth">Se connecter</button>
+        <button class="btn btn-accent" data-open-modal="auth" data-pref="signup">S’inscrire</button>
+      </div>
+    </div>
+
+    <div id="nav-mobile" class="nav-mobile" hidden>
+      <nav aria-label="Navigation mobile">
+        <a href="find.html">Accueil</a>
+        <a href="find.html" aria-current="page">Médecins</a>
+        <a href="book.html">Rendez-vous</a>
+        <a href="live.html">File d’attente</a>
+        <a href="emg.html">Urgences</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main results content -->
+  <main>
+    <section class="results-shell">
+      <div class="results-wrap">
+        <header class="results-header">
+          <div class="results-brand-block">
+            <h1>Résultats de recherche</h1>
+            <p>Découvrez les médecins disponibles pour votre besoin (ex. : médecine du sport) et réservez en quelques clics.</p>
+          </div>
+          <div class="results-badge" aria-label="Disponibilité en temps réel">
+            <div class="results-badge-dot" aria-hidden="true"></div>
+            <div>
+              <div style="font-weight:700; line-height:1;">Médecins disponibles</div>
+              <div class="results-badge-sub">Plusieurs créneaux aujourd’hui</div>
+            </div>
+          </div>
+        </header>
+
+        <div class="results-top">
+          <button class="back-btn" type="button" aria-label="Retour à la page précédente" onclick="EMNav.back('find.html')">
+            <span class="back-btn-icon"></span> Retour
+          </button>
+          <div class="crumbs" aria-label="Fil d’Ariane">
+            <span>Accueil</span><span class="sep">›</span><span>Médecins</span><span class="sep">›</span><span>Résultats</span>
+          </div>
+        </div>
+
+        <!-- Search + chips -->
+        <section class="results-panel" aria-label="Recherche et filtres">
+          <label class="results-search" aria-label="Rechercher un médecin ou un service">
+            <div class="results-search-icon" role="img" aria-hidden="true"></div>
+            <input type="text" value="Médecine du sport" />
+          </label>
+          <div class="filter-chips">
+            <span class="chip active"><span class="chip-box"></span> Disponible aujourd’hui</span>
+            <span class="chip"><span class="chip-box"></span> À moins de 1 km</span>
+            <span class="chip"><span class="chip-box"></span> Homme</span>
+            <span class="chip"><span class="chip-box"></span> Femme</span>
+            <span class="chip"><span class="chip-box"></span> Santé mentale</span>
+            <span class="chip"><span class="chip-box"></span> Clinique campus</span>
+          </div>
+        </section>
+
+        <!-- Sidebar + results list -->
+        <div class="results-grid">
+          <!-- Sidebar -->
+          <aside class="aside" aria-label="Affiner les résultats">
+            <h4>Affiner</h4>
+            <div class="aside-group">
+              <div class="aside-group-title">Disponibilité</div>
+              <div class="aside-check">
+                <div class="aside-check-box" aria-hidden="true"></div>
+                <span>Accepte de nouveaux patients</span>
+              </div>
+              <div class="aside-check">
+                <div class="aside-check-box" aria-hidden="true"></div>
+                <span>Soirée</span>
+              </div>
+              <div class="aside-check">
+                <div class="aside-check-box" aria-hidden="true"></div>
+                <span>Week-end</span>
+              </div>
+            </div>
+
+            <div class="aside-group">
+              <div class="aside-group-title">Mode de consultation</div>
+              <div class="aside-check">
+                <div class="aside-check-box" aria-hidden="true"></div>
+                <span>Présentiel</span>
+              </div>
+              <div class="aside-check">
+                <div class="aside-check-box" aria-hidden="true"></div>
+                <span>Téléconsultation</span>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Results -->
+          <section class="results-list" aria-label="Liste des médecins correspondants à la recherche">
+            <!-- Card 1 -->
+            <article class="doctor-card">
+              <!-- ✅ avatar is now clickable + contains your image -->
+              <a class="doctor-avatar" href="profile.html" aria-label="Ouvrir le profil de Dr Alex Johnson">
+                <img
+                  src="assets/doctor.png"
+                  alt="QR code du rendez-vous"
+                  class="qr-img"
+                />
+              </a>
+
+              <div class="doctor-meta">
+                <div class="name"><a href="profile.html" style="color:inherit; text-decoration:none;">Dr Alex Johnson</a></div>
+                <div class="sub">Médecine du sport • Clinique Campus Nord</div>
+                <div class="doctor-tags">
+                  <span class="tag">0,4 km</span>
+                  <span class="tag">Prochain créneau : 14h30</span>
+                  <span class="tag">Présentiel</span>
+                </div>
+              </div>
+
+              <div class="doctor-cta">
+                <div class="avail-pill">
+                  <span class="avail-dot"></span>
+                  <span>Disponible aujourd’hui</span>
+                </div>
+                <button class="btn-secondary" type="button" onclick="EMNav.go('book.html')">Réserver</button>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="doctor-card">
+              <!-- ✅ avatar is now clickable + contains your image -->
+              <a class="doctor-avatar" href="profile.html" aria-label="Ouvrir le profil de Dr Maria Chen">
+                <img
+                  src="assets/doctor.png"
+                  alt="QR code du rendez-vous"
+                  class="qr-img"
+                />
+              </a>
+
+              <div class="doctor-meta">
+                <div class="name"><a href="profile.html" style="color:inherit; text-decoration:none;">Dr Maria Chen</a></div>
+                <div class="sub">Kinésithérapie • Clinique Campus Est</div>
+                <div class="doctor-tags">
+                  <span class="tag">1,1 km</span>
+                  <span class="tag">Prochain créneau : 16h10</span>
+                  <span class="tag">Téléconsultation</span>
+                </div>
+              </div>
+
+              <div class="doctor-cta">
+                <div class="avail-pill">
+                  <span class="avail-dot limited"></span>
+                  <span>Places limitées aujourd’hui</span>
+                </div>
+                <button class="btn-secondary" type="button" onclick="EMNav.go('book.html')">Réserver</button>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="doctor-card">
+              <!-- ✅ avatar is now clickable + contains your image -->
+              <a class="doctor-avatar" href="profile.html" aria-label="Ouvrir le profil de la Cellule Santé Mentale Campus">
+                <img
+                  src="assets/doctor.png"
+                  alt="QR code du rendez-vous"
+                  class="qr-img"
+                />
+              </a>
+
+              <div class="doctor-meta">
+                <div class="name"><a href="profile.html" style="color:inherit; text-decoration:none;">Cellule Santé Mentale Campus</a></div>
+                <div class="sub">Conseil & accompagnement • Espace Bien-être étudiant</div>
+                <div class="doctor-tags">
+                  <span class="tag">Sur campus</span>
+                  <span class="tag">Sans rendez-vous 9h00–12h00</span>
+                </div>
+              </div>
+
+              <div class="doctor-cta">
+                <div class="avail-pill">
+                  <span class="avail-dot open"></span>
+                  <span>Ouvert maintenant</span>
+                </div>
+                <button class="btn-secondary" type="button">Voir les options</button>
+              </div>
+            </article>
+
+            <!-- Pagination -->
+            <div class="results-paging" aria-label="Pagination">
+              <button class="page-btn active" type="button">1</button>
+              <button class="page-btn" type="button">2</button>
+              <button class="page-btn" type="button">3</button>
+              <button class="page-btn" type="button">Suivant ›</button>
+            </div>
+
+            <p class="results-note">
+              Prototype — contenu statique, pour illustrer la recherche, les filtres et la présentation des résultats EspritMed.
+            </p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footgrid">
+      <div>
+        <strong style="color:var(--primary)">EspritMed</strong>
+        <p style="margin:.4rem 0 0">Service de santé universitaire — Tunis</p>
+        <p style="margin:.2rem 0 0; opacity:.9">© <span id="year"></span> Tous droits réservés.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Liens</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="#">Charte de confidentialité</a></li>
+          <li><a href="#">Conditions d’utilisation</a></li>
+          <li><a href="#">Accessibilité</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin:0 0 .4rem; color:var(--primary)">Contact</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:.3rem">
+          <li><a href="mailto:sante@univ.tn">sante@univ.tn</a></li>
+          <li><a href="tel:+21600000000">+216 00 000 000</a></li>
+          <li>Av. de l’Université, Tunis</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-backdrop" id="auth-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-desc">
+      <header>
+        <h3 id="auth-title">Bienvenue</h3>
+        <button class="close" type="button" aria-label="Fermer" data-close-modal>×</button>
+      </header>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" id="tab-login" aria-controls="panel-login">Connexion</button>
+        <button class="tab" role="tab" aria-selected="false" id="tab-signup" aria-controls="panel-signup">Inscription</button>
+      </div>
+
+      <div class="body">
+        <!-- LOGIN -->
+        <section id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Email</span>
+              <input class="input" type="email" autocomplete="username" required placeholder="vous@univ.tn" id="login-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="current-password" required placeholder="••••••••" id="login-pass">
+            </label>
+            <span class="error" id="login-error">Email ou mot de passe invalide.</span>
+            <div class="actions">
+              <a class="link" href="#">Mot de passe oublié ?</a>
+              <button class="btn" type="submit">Se connecter</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SIGNUP -->
+        <section id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
+          <form class="form-grid" novalidate>
+            <label>
+              <span>Nom complet</span>
+              <input class="input" type="text" autocomplete="name" required placeholder="Votre nom">
+            </label>
+            <label>
+              <span>Email universitaire</span>
+              <input class="input" type="email" autocomplete="email" required placeholder="vous@univ.tn" id="signup-email">
+            </label>
+            <label>
+              <span>Mot de passe</span>
+              <input class="input" type="password" autocomplete="new-password" required placeholder="Au moins 8 caractères" id="signup-pass">
+            </label>
+            <span class="error" id="signup-error">Veuillez vérifier vos informations.</span>
+            <div class="actions">
+              <label style="display:flex; align-items:center; gap:.5rem">
+                <input type="checkbox" required> J’accepte les <a class="link" href="#" style="margin-left:.3rem">conditions</a>.
+              </label>
+              <button class="btn btn-accent" type="submit">Créer le compte</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const burger = document.querySelector('.hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    burger?.addEventListener('click', ()=>{
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      navMobile.hidden = open;
+      navMobile.style.display = open ? 'none' : 'block';
+    });
+
+    // Modal
+    const backdrop = document.getElementById('auth-backdrop');
+    const openers  = document.querySelectorAll('[data-open-modal="auth"]');
+    const closer   = document.querySelectorAll('[data-close-modal]');
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup= document.getElementById('tab-signup');
+    const paneLogin= document.getElementById('panel-login');
+    const paneSignup=document.getElementById('panel-signup');
+
+    const focusablesSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    let lastFocused;
+
+    function setTabs(mode='login'){
+      const isLogin = mode === 'login';
+      tabLogin.setAttribute('aria-selected', isLogin);
+      tabSignup.setAttribute('aria-selected', !isLogin);
+      paneLogin.hidden = !isLogin;
+      paneSignup.hidden = isLogin;
+      (document.getElementById(isLogin ? 'login-email' : 'signup-email'))?.focus({preventScroll:true});
+    }
+
+    function openModal(pref){
+      lastFocused = document.activeElement;
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      setTabs(pref === 'signup' ? 'signup' : 'login');
+      const focusables = backdrop.querySelectorAll(focusablesSelector);
+      const first = focusables[0], last = focusables[focusables.length-1];
+      backdrop.addEventListener('keydown', trap);
+      function trap(e){
+        if(e.key === 'Escape'){ closeModal(); }
+        if(e.key === 'Tab'){
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      backdrop._trap = trap;
+    }
+
+    function closeModal(){
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      backdrop.removeEventListener('keydown', backdrop._trap || (()=>{}));
+      lastFocused && lastFocused.focus({preventScroll:true});
+    }
+
+    openers.forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const pref = btn.dataset.pref;
+        openModal(pref);
+      });
+    });
+    closer.forEach(btn=> btn.addEventListener('click', closeModal));
+    backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+
+    // Tabs click
+    tabLogin.addEventListener('click', ()=> setTabs('login'));
+    tabSignup.addEventListener('click', ()=> setTabs('signup'));
+
+    // Dummy validation demo
+    document.querySelector('#panel-login form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('login-email').value && document.getElementById('login-pass').value;
+      document.getElementById('login-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Connecté ✨ (démo)'); }
+    });
+    document.querySelector('#panel-signup form')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const ok = document.getElementById('signup-email').value && document.getElementById('signup-pass').value;
+      document.getElementById('signup-error').style.display = ok ? 'none' : 'block';
+      if(ok){ closeModal(); alert('Compte créé 🎉 (démo)'); }
+    });
+
+    // Reduce motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.btn').forEach(b=> b.style.transition='none');
+    }
+  </script>
+
+  <script>
+    // Minimal navigation helpers for this static prototype
+    window.EMNav = {
+      go: function (url) { window.location.href = url; },
+      back: function (fallback) {
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = fallback || "find.html";
+      }
+    };
+  </script>
+</body>
+</html>

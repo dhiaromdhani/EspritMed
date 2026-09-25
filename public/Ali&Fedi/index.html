@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EspritMed — Dossier médical</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="home.html">
+      <span class="brand-logo">EM</span>
+      <span class="brand-text">EspritMed</span>
+    </a>
+
+    <nav class="nav">
+      <a href="home.html">Accueil</a>
+      <a class="active" href="index.html">Fiche medicale</a>
+      <a href="rendezvouz.html">Rendez-vous</a>
+      <a href="tt.html">Rechercher médecin</a>
+      <a href="ind.html">Espace Consultation</a>
+      <a href="loc.html">A propos de nous</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-outline" type="button">Se connecter</button>
+      <button class="btn btn-solid" type="button">S'inscrire</button>
+    </div>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="nav-mobile">☰</button>
+  </div>
+
+  <div id="nav-mobile" class="nav-mobile" hidden>
+    <a href="home.html">Accueil</a>
+    <a class="active" href="index.html">Fiche medicale</a>
+    <a href="rendezvouz.html">Rendez-vous</a>
+    <a href="ind.html">Espace Consultation</a>
+    <a href="loc.html">A propos de nous</a>
+    <div class="nav-mobile-actions">
+      <button class="btn btn-outline" type="button">Se connecter</button>
+      <button class="btn btn-solid" type="button">S'inscrire</button>
+    </div>
+  </div>
+</header>
+
+<main class="page-bg">
+  <div class="container">
+    <section class="medical-card" aria-label="Dossier médical">
+
+      <div class="medical-head">
+        <div class="mh-left">
+          <h1>Dossier médical</h1>
+          <p>Résumé des consultations effectuées au centre de santé universitaire.</p>
+        </div>
+
+        <div class="mh-right">
+          <div class="mh-line"><span class="mh-label">Étudiant :</span> Aï. B.</div>
+          <div class="mh-line"><span class="mh-label">Numéro dossier :</span> EM-2024-0293</div>
+        </div>
+      </div>
+
+      <div class="medical-list">
+
+        <div class="doc-item">
+          <div class="doc-ico" aria-hidden="true">
+            <!-- icône "ordonnance" -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h7l3 3v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M14 3v4h4" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 12h7M8 16h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="doc-mid">
+            <div class="doc-title">Ordonnances</div>
+            <div class="doc-sub">Traitements prescrits et posologie.</div>
+          </div>
+
+          <div class="doc-badge">3 fichiers</div>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-ico" aria-hidden="true">
+            <!-- icône "notes" -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M6 3h12a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 8h8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="doc-mid">
+            <div class="doc-title">Notes des médecins</div>
+            <div class="doc-sub">Observations cliniques et recommandations.</div>
+          </div>
+
+          <div class="doc-badge">5 entrées</div>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-ico" aria-hidden="true">
+            <!-- icône "documents" -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M7 7h10v14H7V7Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 3h10v14h-2" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="doc-mid">
+            <div class="doc-title">Documents</div>
+            <div class="doc-sub">Résultats de laboratoire, imagerie, certificats.</div>
+          </div>
+
+          <div class="doc-badge">4 documents</div>
+        </div>
+
+        <div class="doc-item active">
+          <div class="doc-ico" aria-hidden="true">
+            <!-- icône "résumé" -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h8l2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M15 3v4h4" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 11h7M8 15h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="doc-mid">
+            <div class="doc-title">Résumé médical</div>
+            <div class="doc-sub">Synthèse compacte de votre état de santé actuel.</div>
+          </div>
+
+          <div class="doc-badge ghost">Vue active</div>
+        </div>
+
+      </div>
+
+      <!-- <div class="medical-cta">
+        <button class="btn-download" type="button">Télécharger le dossier en PDF</button>
+      </div> -->
+      <div class="medical-cta">
+        <button class="btn-download" type="button" id="downloadBtn">Télécharger le dossier en PDF</button>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>EspritMed</h4>
+      <p>Service de santé universitaire — Tunis</p>
+      <p>© <span class="js-year"></span> Tous droits réservés.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Liens</h4>
+      <a href="#confidentialite">Charte de confidentialité</a>
+      <a href="#conditions">Conditions d'utilisation</a>
+      <a href="#accessibilite">Accessibilité</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <a href="mailto:sante@univ.tn">sante@univ.tn</a>
+      <a href="tel:+21600000000">+216 00 000 000</a>
+      <p>Av. de l’Université, Tunis</p>
+    </div>
+  </div>
+</footer>
+
+<!-- <script>
+  document.querySelectorAll(".js-year").forEach(el => el.textContent = new Date().getFullYear());
+
+  const burger = document.querySelector(".burger");
+  const navMobile = document.getElementById("nav-mobile");
+
+  if (burger && navMobile) {
+    burger.addEventListener("click", () => {
+      const isOpen = !navMobile.hidden;
+      navMobile.hidden = isOpen;
+      burger.setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
+</script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  document.querySelectorAll(".js-year").forEach(el => el.textContent = new Date().getFullYear());
+
+  const burger = document.querySelector(".burger");
+  const navMobile = document.getElementById("nav-mobile");
+
+  if (burger && navMobile) {
+    burger.addEventListener("click", () => {
+      const isOpen = !navMobile.hidden;
+      navMobile.hidden = isOpen;
+      burger.setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
+
+  // PDF Download functionality
+  const downloadBtn = document.getElementById('downloadBtn');
+  
+  downloadBtn.addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Disable button during generation
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Génération en cours...';
+    
+    try {
+      // Header
+      doc.setFillColor(31, 111, 106);
+      doc.rect(0, 0, 210, 40, 'F');
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(24);
+      doc.setFont(undefined, 'bold');
+      doc.text('EspritMed', 20, 20);
+      
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text('Dossier Médical', 20, 30);
+      
+      // Patient info
+      doc.setTextColor(23, 49, 50);
+      doc.setFontSize(10);
+      doc.text('Étudiant : Aï. B.', 20, 55);
+      doc.text('Numéro dossier : EM-2024-0293', 20, 62);
+      doc.text('Date d\'édition : ' + new Date().toLocaleDateString('fr-FR'), 20, 69);
+      
+      // Divider
+      doc.setDrawColor(234, 247, 246);
+      doc.setLineWidth(0.5);
+      doc.line(20, 75, 190, 75);
+      
+      // Section: Ordonnances
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.setTextColor(31, 111, 106);
+      doc.text('Ordonnances', 20, 90);
+      
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(107, 128, 128);
+      doc.text('Traitements prescrits et posologie', 20, 97);
+      doc.text('3 fichiers disponibles', 20, 104);
+      
+      // Section: Notes des médecins
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.setTextColor(31, 111, 106);
+      doc.text('Notes des médecins', 20, 120);
+      
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(107, 128, 128);
+      doc.text('Observations cliniques et recommandations', 20, 127);
+      doc.text('5 entrées enregistrées', 20, 134);
+      
+      // Section: Documents
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.setTextColor(31, 111, 106);
+      doc.text('Documents', 20, 150);
+      
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(107, 128, 128);
+      doc.text('Résultats de laboratoire, imagerie, certificats', 20, 157);
+      doc.text('4 documents disponibles', 20, 164);
+      
+      // Section: Résumé médical
+      doc.setFontSize(14);
+      doc.setFont(undefined, 'bold');
+      doc.setTextColor(31, 111, 106);
+      doc.text('Résumé médical', 20, 180);
+      
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.setTextColor(107, 128, 128);
+      doc.text('Synthèse compacte de votre état de santé actuel', 20, 187);
+      
+      // Footer
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text('EspritMed - Service de santé universitaire', 20, 280);
+      doc.text('Document généré le ' + new Date().toLocaleString('fr-FR'), 20, 285);
+      
+      // Save PDF
+      doc.save('Dossier_Medical_EM-2024-0293.pdf');
+      
+    } catch (error) {
+      console.error('Erreur lors de la génération du PDF:', error);
+      alert('Une erreur est survenue lors de la génération du PDF.');
+    } finally {
+      // Re-enable button
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = 'Télécharger le dossier en PDF';
+    }
+  });
+</script>
+
+</body>
+</html>
